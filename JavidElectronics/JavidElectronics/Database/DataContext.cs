@@ -1,5 +1,6 @@
 ﻿using JavidElectronics.Database.Models;
 using JavidElectronics.Database.Models.Common;
+using JavidElectronics.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace JavidElectronics.Database
