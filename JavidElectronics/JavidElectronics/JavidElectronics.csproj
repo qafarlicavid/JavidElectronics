@@ -9,8 +9,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\" />
     <Folder Include="Areas\Client\" />
-    <Folder Include="Contracts\" />
-    <Folder Include="Database\Configurations\" />
     <Folder Include="Validators\" />
     <Folder Include="Services\Abstracts\" />
     <Folder Include="Services\Concretes\" />
