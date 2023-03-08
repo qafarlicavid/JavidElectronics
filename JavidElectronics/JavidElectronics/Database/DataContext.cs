@@ -20,6 +20,7 @@ namespace JavidElectronics.Database
         public DbSet<Category> Categories { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Creator> Creators { get; set; }
         public DbSet<Navbar> Navbars { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
