@@ -15,6 +15,7 @@ namespace JavidElectronics.Database.Models
         public DateTime UpdatedAt { get; set; }
 
         public List<BlogImage>? BlogImages { get; set; }
+        public List<BlogCategory>? BlogCategories { get; set; }
         public List<BlogVideo>? BlogVideos { get; set; }
         public List<BlogTag>? BlogTags { get; set; }
     }

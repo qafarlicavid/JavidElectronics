@@ -15,6 +15,7 @@ namespace JavidElectronics.Database
         public DbSet<BasketProduct> BasketProducts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogImage> BlogImages { get; set; }
+        public DbSet<BlogCategory> BlogCategories { get; set; }
         public DbSet<BlogTag> BlogTags { get; set; }
         public DbSet<BlogVideo> BlogVideos { get; set; }
         public DbSet<Category> Categories { get; set; }
