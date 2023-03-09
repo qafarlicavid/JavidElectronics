@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\" />
-    <Folder Include="Areas\Client\" />
+    <Folder Include="Areas\Admin\Validators\" />
+    <Folder Include="Areas\Client\Controllers\" />
+    <Folder Include="Areas\Client\ViewModels\" />
+    <Folder Include="Areas\Client\ViewComponents\" />
     <Folder Include="Validators\" />
     <Folder Include="Services\Abstracts\" />
     <Folder Include="Services\Concretes\" />
