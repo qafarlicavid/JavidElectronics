@@ -1,0 +1,28 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.Contact
+@model List<ListItemViewModel>
+
+<div class="container">
+    <div class="row mt-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model)
+                {
+                    <tr>
+                        <th scope="row">@contact.Name</th>
+                        <td>@contact.Email</td>
+                        <td>@contact.Phone</td>
+                        <td>@contact.Message</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
