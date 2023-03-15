@@ -10,11 +10,13 @@
 
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    <link rel="stylesheet" href="~/client/~/client/assets/css/style.css">
+    <link rel="stylesheet" href="~/client/assets/css/style.css">
     <link rel="stylesheet" href="~/client/assets/css/junko.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    @RenderSection("style", required : false)
 </head>
 
 <body>
@@ -69,15 +71,18 @@
                                 <div class="middle-right-info">
 
                                     <div class="mini-cart-wrapper">
-                                        <a href=""><i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i
-                                                class="fa fa-angle-down"></i></a>
+                                        <a href="">
+                                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i>
+                                        </a>
                                         <span class="cart-quantity">2</span>
                                         <!--mini cart-->
                                         <div class="mini-cart">
                                             <div class="cart-item">
                                                 <div class="cart-img">
-                                                    <a href="#"><img src="~/client/assets/images/product/product1.jpg"
-                                                            alt=""></a>
+                                                    <a href="#">
+                                                        <img src="~/client/assets/images/product/product1.jpg"
+                                                             alt="">
+                                                    </a>
                                                 </div>
                                                 <div class="cart-info">
                                                     <a href="#">Iphone 6</a>
@@ -89,8 +94,10 @@
                                             </div>
                                             <div class="cart-item">
                                                 <div class="cart-img">
-                                                    <a href="#"><img src="~/client/assets/images/product/product2.jpg"
-                                                            alt=""></a>
+                                                    <a href="#">
+                                                        <img src="~/client/assets/images/product/product2.jpg"
+                                                             alt="">
+                                                    </a>
                                                 </div>
                                                 <div class="cart-info">
                                                     <a href="#">Samsung</a>
@@ -132,84 +139,17 @@
             </div>
 
             <!--header middel end-->
-
             <!--header bottom satrt-->
-            <div class="header-main-nav">
-                <div class="container">
-                    <nav>
-                        <ul>
-                            <li id="top-menu">
-                                <a href="" class="navbarname">HOME <i class="fa-solid fa-chevron-down"></i></a>
-                                <ul id="drop-menu">
-                                    <li>Home - Electronics</li>
-                                    <li>Home - NFT</li>
-                                    <li>Home - Fashion</li>
-                                    <li>Home - Jewellery</li>
-                                    <li>Home - Furniture</li>
-                                    <li><a href="index.html">Home - Multiprpse</a></li>
-                                    <li>RTL - Version</li>
-                                </ul>
-                            </li>
-                            <li id="top-menu">
-                                <a href="" class="navbarname">SHOP <i class="fa-solid fa-chevron-down"></i></a>
-                                <ul id="drop-menu">
-                                    <li><a href="shop.html">Shop With Sidebar</a></li>
-                                    <li>Shop No Sidebar</li>
-                                    <li>Pr Variation 1</li>
-                                    <li>Pr Variation 2</li>
-                                    <li>Pr Variation 3</li>
-                                    <li>Pr Variation 4</li>
-                                    <li>Pr Variation 5</li>
-                                    <li>Pr Variation 6</li>
-                                    <li>Pr Variation 7</li>
 
-                                </ul>
-                            </li>
-                            <li id="top-menu">
-                                <a href="" class="navbarname">PAGES <i class="fa-solid fa-chevron-down"></i></a>
-                                <ul id="drop-menu">
-                                    <li>Wish List</li>
-                                    <li><a href="basket.html">Cart</a></li>
-                                    <li>Checkout</li>
-                                    <li>Account</li>
-                                    <li>Sign Up</li>
-                                    <li><a href="login.html">Sign In</a></li>
-                                    <li>Forgot Password</li>
-                                    <li>Reset Password</li>
-                                    <li>Privacy Policy</li>
-                                    <li>Coming Soon</li>
-                                    <li>404 Error</li>
-                                    <li>Typography</li>
-                                </ul>
-                            </li>
-                            <li id="top-menu">
-                                <a href="" class="navbarname">ABOUT</a>
-                            </li>
-                            <li id="top-menu">
-                                <a href="" class="navbarname">BLOG <i class="fa-solid fa-chevron-down"></i></a>
-                                <ul id="drop-menu">
-                                    <li>Blog List</li>
-                                    <li>Blog Grid</li>
-                                    <li>Standart Post</li>
-                                    <li>Gallery Post</li>
-                                    <li>Video Post</li>
-                                    <li>Audio Post</li>
-                                    <li>Quote Post</li>
-                                </ul>
-                            </li>
-                            <li id="top-menu">
-                                <a href="contact.html" class="navbarname">CONTACT</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+            @await Component.InvokeAsync("NavbarHeader")
+            
             <!--header bottom end-->
         </div>
     </header>
 
     <!--header area end-->
 
+    @RenderBody();
 
     <!--footer area start-->
 
@@ -221,13 +161,22 @@
                         <div class="axil-footer-widget">
                             <h5 class="widget-title">Support</h5>
                             <div class="inner">
-                                <p>Baku, Azerbaijan
+                                <p>
+                                    Baku, Azerbaijan
                                 </p>
                                 <ul class="support-list-item">
-                                    <li><a href="mailto:example@domain.com"><i class="fa-regular fa-envelope-open"></i>
-                                            cavid.qafarli@gmail.com</a></li>
-                                    <li><a href="tel:(+01)850-315-5862"><i class="fa-solid fa-phone"></i> +994 70 523 85
-                                            02</a></li>
+                                    <li>
+                                        <a href="mailto:example@domain.com">
+                                            <i class="fa-regular fa-envelope-open"></i>
+                                            cavid.qafarli@gmail.com
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="tel:(+01)850-315-5862">
+                                            <i class="fa-solid fa-phone"></i> +994 70 523 85
+                                            02
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -268,17 +217,17 @@
                                 <div class="download-btn-group d-flex">
                                     <div class="qr-code py-3">
                                         <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/others/qr.png"
-                                            alt="Axilthemes">
+                                             alt="Axilthemes">
                                     </div>
                                     <div class="app-link d-flex flex-column">
                                         <a href="#">
                                             <img class="py-3"
-                                                src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/others/app-store.png"
-                                                alt="App Store">
+                                                 src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/others/app-store.png"
+                                                 alt="App Store">
                                         </a>
                                         <a href="#">
                                             <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/others/play-store.png"
-                                                alt="Play Store">
+                                                 alt="Play Store">
                                         </a>
                                     </div>
                                 </div>
@@ -312,12 +261,18 @@
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom d-flex
                             ">
-                                <li><img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-1.png"
-                                        alt="paypal cart"></li>
-                                <li><img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-2.png"
-                                        alt="paypal cart"></li>
-                                <li><img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-5.png"
-                                        alt="paypal cart"></li>
+                                <li>
+                                    <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-1.png"
+                                         alt="paypal cart">
+                                </li>
+                                <li>
+                                    <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-2.png"
+                                         alt="paypal cart">
+                                </li>
+                                <li>
+                                    <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-5.png"
+                                         alt="paypal cart">
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -332,13 +287,15 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="~/client/assets/app/product-modal.js"></script>
     <script src="~/client/assets/app/minicart.js"></script>
     <script src="~/client/assets/app/homeslider.js"></script>
     <script src="~/client/assets/app/backtotop.js"></script>
+
+    @RenderSection("script", required : false)
 
 </body>
 
