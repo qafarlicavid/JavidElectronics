@@ -30,7 +30,7 @@ namespace JavidElectronics.Areas.Client.Controllers
             return View();
         }
 
-        [HttpPost("contact", Name = "client-home-index")]
+        [HttpPost("contact", Name = "client-home-contact")]
         public async Task<IActionResult> ContactAsync([FromForm] CreateViewModel contactViewModel)
         {
             if (!ModelState.IsValid)
