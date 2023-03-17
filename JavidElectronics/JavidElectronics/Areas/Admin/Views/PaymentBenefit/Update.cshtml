@@ -1,0 +1,41 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.PaymentBenefit
+@model UpdateViewModel
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Payment Benefits</h4>
+            </div>
+            <div class="card-body">
+                <div class="general-label">
+                    <form method="POST" asp-route="admin-paymentbenefit-update" enctype="multipart/form-data">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input asp-for="Name" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Content</label>
+                            <input asp-for="Content" class="form-control">
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <input asp-for="ImageUrl" type="hidden">
+                            <img src="~/@Model.ImageUrl" width="20%" />
+                        </div>
+                        <label>ImageName</label>
+                        <input asp-for="ImageName" class="form-control">
+
+                        <button type="submit" class="btn btn-primary  mt-2">Submit</button>
+                    </form>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>

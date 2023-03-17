@@ -1,0 +1,51 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.PaymentBenefit
+@model List<ListItemViewModel>
+
+
+<div class="">
+    <a asp-route="admin-paymentbenefit-add" target="_blank" class="btn btn-secondary">Add new Payment Benefit</a>
+</div>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Payment Benefits</h4>
+        </div><!--end card-header-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>URL</th>
+
+                            <th class="text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td><img src="~/@item.ImageUrl" width="20%" /></td>
+
+                                <td>@item.Title</td>
+                                <td>@item.Content</td>
+
+                                <td class="text-end">
+                                    <a asp-route="admin-paymentbenefit-update" asp-route-id="@item.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <form class="d-none" method="POST" asp-route="admin-paymentbenefit-delete" asp-route-id="@item.Id" id="update-@item.Id">
+                                    </form>
+
+                                    <button type="submit" form="update-@item.Id"><i class="las la-trash-alt text-secondary font-16"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>
