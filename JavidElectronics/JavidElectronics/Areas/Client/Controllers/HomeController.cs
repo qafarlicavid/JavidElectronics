@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using JavidElectronics.Database;
 using JavidElectronics.Database.Models;
 using JavidElectronics.Areas.Client.ViewModels.Home.Contact;
+using JavidElectronics.Services.Abstracts;
+using JavidElectronics.Contracts.File;
+using JavidElectronics.Areas.Client.ViewModels.Home.Index;
 
 namespace JavidElectronics.Areas.Client.Controllers
 {
@@ -11,15 +14,30 @@ namespace JavidElectronics.Areas.Client.Controllers
     public class HomeController : Controller
     {
         private readonly DataContext _dbContext;
-        public HomeController(DataContext dbContext)
+        private readonly IFileService _fileService;
+        public HomeController(DataContext dbContext, IFileService fileService)
         {
             _dbContext = dbContext;
+            _fileService = fileService;
         }
 
-        [HttpGet("index", Name = "client-home-index")]
-        public async Task<IActionResult> IndexAsync()
+        [HttpGet("~/", Name = "client-home-index")]
+        [HttpGet("index")]
+        public async Task<IActionResult> IndexAsync([FromServices] IFileService fileService)
         {
-            return View();
+            var model = new IndexViewModel
+            {
+                Sliders = await _dbContext.Sliders.OrderBy(s => s.Order).Select(s => new SliderListItemViewModel(s.Id, s.MainTitle!, s.Content!,
+                s.Button!,
+                s.ButtonRedirectUrl!,
+                fileService.GetFileUrl(s.BackgroundİmageInFileSystem, UploadDirectory.Slider),
+                s.Order))
+                .ToListAsync(),
+            };
+
+
+
+            return View(model);
         }
 
         #region Contact
