@@ -2,578 +2,509 @@
 @using JavidElectronics.Areas.Client.ViewModels.Home.Index
 @model IndexViewModel
    *@
- 
+
 <!--slider area start-->
-    <section class="slider-section mb-70">
-        <div class="slider-area owl-carousel">
+<section class="slider-section mb-70">
+    <div class="slider-area owl-carousel">
+
+        @foreach (var slider in Model.Sliders)
+        {
             <div class="single-slider d-flex align-items-center">
-                <img src="assets/images/slider/slider1.jpg" alt="">
+                <img src="~/@slider.BackGroundImageUrl" alt="">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="slider-content">
-                                <h1> best skin</h1>
-                                <h2>qled 75 inch q7f</h2>
+
+                                <h1> @slider.MainTitle</h1>
+
+                                <h2>@slider.Content</h2>
+
                                 <p>exclusive offer <span> 20% off </span> this week</p>
-                                <a class="button" href="shop.html">Shopping Now</a>
+
+                                <a asp-route="@slider.ButtonRedirectUrl" class="button">
+                                    @slider.Button
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="single-slider d-flex align-items-center">
-                <img src="assets/images/slider/slider2.jpg" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="slider-content">
-                                <h1>Dual Front</h1>
-                                <h2>camera 20mp</h2>
-                                <p>exclusive offer <span> 20% off </span> this week</p>
-                                <a class="button" href="shop.html">shopping now</a>
-                            </div>
+        }
+
+        @*Slider'dan bashga hamisini Components hissesinde yazib bura invoke edeceyik (BestPractice)*@
+
+    </div>
+</section>
+<!--slider area end-->
+<!--shipping area start-->
+<section class="shipping-area mb-70">
+    <div class="container">
+        @await Component.InvokeAsync("Benefit")
+    </div>
+</section>
+<!--shipping area end-->
+<!-- hot deal products start -->
+
+<section id="hotdealsproducts">
+
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section_title">
+                            <h2>Hot Deals Products</h2>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="single-slider d-flex align-items-center">
-                <img src="assets/images/slider/slider3.jpg" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="slider-content">
-                                <h1>Hurry Up!</h1>
-                                <h2>IN THE WORD 2022</h2>
-                                <p>exclusive offer <span> 20% off </span> this week</p>
-                                <a class="button" href="shop.html">shopping now</a>
-                            </div>
+            <div class="cards">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img-top">
+                        <img src="~/client/assets/images/product/product6.jpg" alt="Card image cap">
+                        <div class="shop-list">
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                            <a class="pink" href="">Add to Card</a>
+                            <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
                         </div>
+                    </div>
+                    <div class="sale">20% OFF</div>
+                    <div class="card-body">
+                        <p>Level 20 RGB Cherry</p>
+                        <div class="card-text">
+
+                            <span class="old-price">$80</span>
+                            <span class="new-price">$60</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img-top">
+                        <img src="~/client/assets/images/product/product3.jpg" alt="Card image cap">
+                        <div class="shop-list">
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                            <a class="pink" href="">Add to Card</a>
+                            <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="sale">20% OFF</div>
+                    <div class="card-body">
+                        <p>Level 20 RGB Cherry</p>
+                        <div class="card-text">
+
+                            <span class="old-price">$80</span>
+                            <span class="new-price">$60</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img-top">
+                        <img src="~/client/assets/images/product/product2.jpg" alt="Card image cap">
+                        <div class="shop-list">
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                            <a class="pink" href="">Add to Card</a>
+                            <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="sale">20% OFF</div>
+                    <div class="card-body">
+                        <p>Level 20 RGB Cherry</p>
+                        <div class="card-text">
+
+                            <span class="old-price">$80</span>
+                            <span class="new-price">$60</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img-top">
+                        <img src="~/client/assets/images/product/product5.jpg" alt="Card image cap">
+                        <div class="shop-list">
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                            <a class="pink" href="">Add to Card</a>
+                            <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="sale">20% OFF</div>
+                    <div class="card-body">
+                        <p>Level 20 RGB Cherry</p>
+                        <div class="card-text">
+
+                            <span class="old-price">$80</span>
+                            <span class="new-price">$60</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img-top">
+                        <img src="~/client/assets/images/product/product7.jpg" alt="Card image cap">
+                        <div class="shop-list">
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                            <a class="pink" href="">Add to Card</a>
+                            <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="sale">20% OFF</div>
+                    <div class="card-body">
+                        <p>Level 20 RGB Cherry</p>
+                        <div class="card-text">
+
+                            <span class="old-price">$80</span>
+                            <span class="new-price">$60</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img-top">
+                        <img src="~/client/assets/images/product/product8.jpg" alt="Card image cap">
+                        <div class="shop-list">
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                            <a class="pink" href="">Add to Card</a>
+                            <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="sale">20% OFF</div>
+                    <div class="card-body">
+                        <p>Level 20 RGB Cherry</p>
+                        <div class="card-text">
+                            <i id="dot1" class="fa-solid fa-circle"></i>
+                            <i id="dot2" class="fa-solid fa-circle"></i>
+                            <i id="dot3" class="fa-solid fa-circle"></i><br>
+                            <span class="old-price">$80</span>
+                            <span class="new-price">$60</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img-top">
+                        <img src="~/client/assets/images/product/product10.jpg" alt="Card image cap">
+                        <div class="shop-list">
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                            <a class="pink" href="">Add to Card</a>
+                            <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="sale">20% OFF</div>
+                    <div class="card-body">
+                        <p>Level 20 RGB Cherry</p>
+                        <div class="card-text">
+                            <i id="dot1" class="fa-solid fa-circle"></i>
+                            <i id="dot2" class="fa-solid fa-circle"></i>
+                            <i id="dot3" class="fa-solid fa-circle"></i><br>
+                            <span class="old-price">$80</span>
+                            <span class="new-price">$60</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-img-top">
+                        <img src="~/client/assets/images/product/product11.jpg" alt="Card image cap">
+                        <div class="shop-list">
+                            <a href=""><i class="fa-regular fa-heart"></i></a>
+                            <a class="pink" href="">Add to Card</a>
+                            <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="sale">20% OFF</div>
+                    <div class="card-body">
+                        <p>Level 20 RGB Cherry</p>
+                        <div class="card-text">
+                            <i id="dot1" class="fa-solid fa-circle"></i>
+                            <i id="dot2" class="fa-solid fa-circle"></i>
+                            <i id="dot3" class="fa-solid fa-circle"></i><br>
+                            <span class="old-price">$80</span>
+                            <span class="new-price">$60</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+</section>
+
+<!-- hot deal products end -->
+<!--banner area start-->
+<div class="banner-area mb-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="single-banner mb-30">
+                    <div class="banner-thumb">
+                        <a href="shop.html"><img src="~/client/assets/images/bg/banner4.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="single-banner mb-30">
+                    <div class="banner-thumb">
+                        <a href="shop.html"><img src="~/client/assets/images/bg/banner5.jpg" alt=""></a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!--slider area end-->
+    </div>
+</div>
+<!--banner area end-->
+<!--top- category area start-->
+<section id="top-category">
 
-    <!--shipping area start-->
-    <section class="shipping-area mb-70">
-        <div class="container">
-            <div class=" row">
-                <div class="col-lg-3 col-12">
-                    <div class="single-shipping">
-                        <div class="shipping-icone">
-                            <img src="assets/images/about/shipping1.png" alt="">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-12">
+                <div class="top_category_header">
+                    <h3>Top Categories This Week</h3>
+                    <p>Aliquam eget consectetuer habitasse interdum.</p>
+                    <a href="shop.html">Show All Categories</a>
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-12">
+                <div class="cards2">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category1.jpg" alt="Card image cap">
                         </div>
-                        <div class="shipping-content">
-                            <h2>Free Shipping</h2>
-                            <p>Free shipping on all US order</p>
+                        <div class="card-body">
+                            <p>Phones</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category2.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Computers</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category3.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Accessories</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category4.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Laptops</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category5.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Monitors</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category2.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Networking</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>PC Gaming</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Smartwatches</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Headphones</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Camera & Photo</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Videogames</p>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-img-top">
+                            <img src="~/client/assets/images/s-product/category1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <p>Sports</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-12">
-                    <div class="single-shipping">
-                        <div class="shipping-icone">
-                            <img src="assets/images/about/shipping2.png" alt="">
-                        </div>
-                        <div class="shipping-content">
-                            <h2>Support 24/7</h2>
-                            <p>Contact us 24 hours a day</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-12">
-                    <div class="single-shipping">
-                        <div class="shipping-icone">
-                            <img src="assets/images/about/shipping3.png" alt="">
-                        </div>
-                        <div class="shipping-content">
-                            <h2>100% Money Back</h2>
-                            <p>You have 30 days to Return</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-12">
-                    <div class="single-shipping">
-                        <div class="shipping-icone ">
-                            <img src="assets/images/about/shipping4.png" alt="">
-                        </div>
-                        <div class="shipping-content">
-                            <h2>Payment Secure</h2>
-                            <p>We ensure secure payment</p>
-                        </div>
-                    </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--top- category area end-->
+<!--blog area start-->
+<section class="blog_section mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section_title">
+                    <h2>From the Blog</h2>
                 </div>
             </div>
         </div>
-    </section>
-    <!--shipping area end-->
-
-    <!-- hot deal products start -->
-
-    <section id="hotdealsproducts">
-
-        <div class="container">
-            <div class="row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section_title">
-                                <h2>Hot Deals Products</h2>
+        <div class="row">
+            <div class="blog_carousel blog_column4 owl-carousel">
+                <div class="col-lg-3">
+                    <article class="single_blog">
+                        <figure>
+                            <div class="blog_thumb">
+                                <a href="blog-details.html"><img src="~/client/assets/images/blog/blog1.jpg" alt=""></a>
                             </div>
-                        </div>
-                    </div>
+                            <figcaption class="blog_content">
+                                <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
+                                <h3 class="post_title"><a href="blog-details.html">Blog image post</a></h3>
+                            </figcaption>
+                        </figure>
+                    </article>
                 </div>
-                <div class="cards">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-img-top">
-                            <img src="assets/images/product/product6.jpg" alt="Card image cap">
-                            <div class="shop-list">
-                                <a href=""><i class="fa-regular fa-heart"></i></a>
-                                <a class="pink" href="">Add to Card</a>
-                                <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                <div class="col-lg-3">
+                    <article class="single_blog">
+                        <figure>
+                            <div class="blog_thumb">
+                                <a href="blog-details.html"><img src="~/client/assets/images/blog/blog2.jpg" alt=""></a>
                             </div>
-                        </div>
-                        <div class="sale">20% OFF</div>
-                        <div class="card-body">
-                            <p>Level 20 RGB Cherry</p>
-                            <div class="card-text">
-
-                                <span class="old-price">$80</span>
-                                <span class="new-price">$60</span>
+                            <figcaption class="blog_content">
+                                <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
+                                <h3 class="post_title"><a href="blog-details.html">Post with Gallery</a></h3>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="single_blog">
+                        <figure>
+                            <div class="blog_thumb">
+                                <a href="blog-details.html"><img src="~/client/assets/images/blog/blog3.jpg" alt=""></a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-img-top">
-                            <img src="assets/images/product/product3.jpg" alt="Card image cap">
-                            <div class="shop-list">
-                                <a href=""><i class="fa-regular fa-heart"></i></a>
-                                <a class="pink" href="">Add to Card</a>
-                                <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
+                            <figcaption class="blog_content">
+                                <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
+                                <h3 class="post_title"><a href="blog-details.html">Post with Audio</a></h3>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="single_blog">
+                        <figure>
+                            <div class="blog_thumb">
+                                <a href="blog-details.html"><img src="~/client/assets/images/blog/blog4.jpg" alt=""></a>
                             </div>
-                        </div>
-                        <div class="sale">20% OFF</div>
-                        <div class="card-body">
-                            <p>Level 20 RGB Cherry</p>
-                            <div class="card-text">
-
-                                <span class="old-price">$80</span>
-                                <span class="new-price">$60</span>
+                            <figcaption class="blog_content">
+                                <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
+                                <h3 class="post_title"><a href="blog-details.html">Post with Video</a></h3>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="single_blog">
+                        <figure>
+                            <div class="blog_thumb">
+                                <a href="blog-details.html"><img src="~/client/assets/images/blog/blog5.jpg" alt=""></a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-img-top">
-                            <img src="assets/images/product/product2.jpg" alt="Card image cap">
-                            <div class="shop-list">
-                                <a href=""><i class="fa-regular fa-heart"></i></a>
-                                <a class="pink" href="">Add to Card</a>
-                                <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <div class="sale">20% OFF</div>
-                        <div class="card-body">
-                            <p>Level 20 RGB Cherry</p>
-                            <div class="card-text">
-
-                                <span class="old-price">$80</span>
-                                <span class="new-price">$60</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-img-top">
-                            <img src="assets/images/product/product5.jpg" alt="Card image cap">
-                            <div class="shop-list">
-                                <a href=""><i class="fa-regular fa-heart"></i></a>
-                                <a class="pink" href="">Add to Card</a>
-                                <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <div class="sale">20% OFF</div>
-                        <div class="card-body">
-                            <p>Level 20 RGB Cherry</p>
-                            <div class="card-text">
-
-                                <span class="old-price">$80</span>
-                                <span class="new-price">$60</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-img-top">
-                            <img src="assets/images/product/product7.jpg" alt="Card image cap">
-                            <div class="shop-list">
-                                <a href=""><i class="fa-regular fa-heart"></i></a>
-                                <a class="pink" href="">Add to Card</a>
-                                <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <div class="sale">20% OFF</div>
-                        <div class="card-body">
-                            <p>Level 20 RGB Cherry</p>
-                            <div class="card-text">
-
-                                <span class="old-price">$80</span>
-                                <span class="new-price">$60</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-img-top">
-                            <img src="assets/images/product/product8.jpg" alt="Card image cap">
-                            <div class="shop-list">
-                                <a href=""><i class="fa-regular fa-heart"></i></a>
-                                <a class="pink" href="">Add to Card</a>
-                                <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <div class="sale">20% OFF</div>
-                        <div class="card-body">
-                            <p>Level 20 RGB Cherry</p>
-                            <div class="card-text">
-                                <i id="dot1" class="fa-solid fa-circle"></i>
-                                <i id="dot2" class="fa-solid fa-circle"></i>
-                                <i id="dot3" class="fa-solid fa-circle"></i><br>
-                                <span class="old-price">$80</span>
-                                <span class="new-price">$60</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-img-top">
-                            <img src="assets/images/product/product10.jpg" alt="Card image cap">
-                            <div class="shop-list">
-                                <a href=""><i class="fa-regular fa-heart"></i></a>
-                                <a class="pink" href="">Add to Card</a>
-                                <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <div class="sale">20% OFF</div>
-                        <div class="card-body">
-                            <p>Level 20 RGB Cherry</p>
-                            <div class="card-text">
-                                <i id="dot1" class="fa-solid fa-circle"></i>
-                                <i id="dot2" class="fa-solid fa-circle"></i>
-                                <i id="dot3" class="fa-solid fa-circle"></i><br>
-                                <span class="old-price">$80</span>
-                                <span class="new-price">$60</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-img-top">
-                            <img src="assets/images/product/product11.jpg" alt="Card image cap">
-                            <div class="shop-list">
-                                <a href=""><i class="fa-regular fa-heart"></i></a>
-                                <a class="pink" href="">Add to Card</a>
-                                <a class="quickmodalview" href=""><i class="fa-regular fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <div class="sale">20% OFF</div>
-                        <div class="card-body">
-                            <p>Level 20 RGB Cherry</p>
-                            <div class="card-text">
-                                <i id="dot1" class="fa-solid fa-circle"></i>
-                                <i id="dot2" class="fa-solid fa-circle"></i>
-                                <i id="dot3" class="fa-solid fa-circle"></i><br>
-                                <span class="old-price">$80</span>
-                                <span class="new-price">$60</span>
-                            </div>
-                        </div>
-                    </div>
-
+                            <figcaption class="blog_content">
+                                <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
+                                <h3 class="post_title"><a href="blog-details.html">Maecenas ultricies</a></h3>
+                            </figcaption>
+                        </figure>
+                    </article>
                 </div>
             </div>
-
-    </section>
-
-    <!-- hot deal products end -->
-
-    <!--banner area start-->
-    <div class="banner-area mb-40">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="single-banner mb-30">
-                        <div class="banner-thumb">
-                            <a href="shop.html"><img src="assets/images/bg/banner4.jpg" alt=""></a>
+        </div>
+    </div>
+</section>
+<!--blog area end-->
+<!--brand area start-->
+<div class="brand_area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="brand_container owl-carousel">
+                    <div class="brand_items">
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand1.jpg" alt=""></a>
+                        </div>
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand2.jpg" alt=""></a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="single-banner mb-30">
-                        <div class="banner-thumb">
-                            <a href="shop.html"><img src="assets/images/bg/banner5.jpg" alt=""></a>
+                    <div class="brand_items">
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand3.jpg" alt=""></a>
+                        </div>
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand4.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="brand_items">
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand5.jpg" alt=""></a>
+                        </div>
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand6.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="brand_items">
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand7.jpg" alt=""></a>
+                        </div>
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand8.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="brand_items">
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand9.jpg" alt=""></a>
+                        </div>
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand10.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="brand_items">
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand2.jpg" alt=""></a>
+                        </div>
+                        <div class="single_brand">
+                            <a href="#"><img src="~/client/assets/images/brand/brand3.jpg" alt=""></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--banner area end-->
-
-
-    <!--top- category area start-->
-    <section id="top-category">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-12">
-                    <div class="top_category_header">
-                        <h3>Top Categories This Week</h3>
-                        <p>Aliquam eget consectetuer habitasse interdum.</p>
-                        <a href="shop.html">Show All Categories</a>
-                    </div>
-                </div>
-
-                <div class="col-lg-10 col-12">
-                    <div class="cards2">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category1.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Phones</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category2.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Computers</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category3.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Accessories</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category4.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Laptops</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category5.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Monitors</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category2.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Networking</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category1.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>PC Gaming</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category1.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Smartwatches</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category1.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Headphones</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category1.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Camera & Photo</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category1.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Videogames</p>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-img-top">
-                                <img src="assets/images/s-product/category1.jpg" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <p>Sports</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!--top- category area end-->
-
-    <!--blog area start-->
-    <section class="blog_section mb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section_title">
-                        <h2>From the Blog</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="blog_carousel blog_column4 owl-carousel">
-                    <div class="col-lg-3">
-                        <article class="single_blog">
-                            <figure>
-                                <div class="blog_thumb">
-                                    <a href="blog-details.html"><img src="assets/images/blog/blog1.jpg" alt=""></a>
-                                </div>
-                                <figcaption class="blog_content">
-                                    <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
-                                    <h3 class="post_title"><a href="blog-details.html">Blog image post</a></h3>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3">
-                        <article class="single_blog">
-                            <figure>
-                                <div class="blog_thumb">
-                                    <a href="blog-details.html"><img src="assets/images/blog/blog2.jpg" alt=""></a>
-                                </div>
-                                <figcaption class="blog_content">
-                                    <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
-                                    <h3 class="post_title"><a href="blog-details.html">Post with Gallery</a></h3>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3">
-                        <article class="single_blog">
-                            <figure>
-                                <div class="blog_thumb">
-                                    <a href="blog-details.html"><img src="assets/images/blog/blog3.jpg" alt=""></a>
-                                </div>
-                                <figcaption class="blog_content">
-                                    <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
-                                    <h3 class="post_title"><a href="blog-details.html">Post with Audio</a></h3>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3">
-                        <article class="single_blog">
-                            <figure>
-                                <div class="blog_thumb">
-                                    <a href="blog-details.html"><img src="assets/images/blog/blog4.jpg" alt=""></a>
-                                </div>
-                                <figcaption class="blog_content">
-                                    <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
-                                    <h3 class="post_title"><a href="blog-details.html">Post with Video</a></h3>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-3">
-                        <article class="single_blog">
-                            <figure>
-                                <div class="blog_thumb">
-                                    <a href="blog-details.html"><img src="assets/images/blog/blog5.jpg" alt=""></a>
-                                </div>
-                                <figcaption class="blog_content">
-                                    <p class="post_author">By <a href="#">admin</a> July 04, 2022</p>
-                                    <h3 class="post_title"><a href="blog-details.html">Maecenas ultricies</a></h3>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--blog area end-->
-
-    <!--brand area start-->
-    <div class="brand_area mb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="brand_container owl-carousel">
-                        <div class="brand_items">
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand1.jpg" alt=""></a>
-                            </div>
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand2.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="brand_items">
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand3.jpg" alt=""></a>
-                            </div>
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand4.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="brand_items">
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand5.jpg" alt=""></a>
-                            </div>
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand6.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="brand_items">
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand7.jpg" alt=""></a>
-                            </div>
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand8.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="brand_items">
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand9.jpg" alt=""></a>
-                            </div>
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand10.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="brand_items">
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand2.jpg" alt=""></a>
-                            </div>
-                            <div class="single_brand">
-                                <a href="#"><img src="assets/images/brand/brand3.jpg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--brand area end-->
+</div>
+<!--brand area end-->
