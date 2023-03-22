@@ -1,0 +1,51 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.Product
+@model AddViewModel
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Products</h4>
+            </div>
+            <div class="card-body">
+                <div class="general-label">
+                    <form method="POST" asp-route="admin-product-add" enctype="multipart/form-data">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <div class="form-group">
+                            <label>Categories</label>
+                            <select asp-for="CategoryIds" asp-items="@(new SelectList(Model.Categories, nameof(CategoryListItemViewModel.Id), nameof(CategoryListItemViewModel.Title)))" class="form-select"></select>
+                            <span asp-validation-for="CategoryIds" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Color</label>
+                            <select asp-for="ColorIds" asp-items="@(new SelectList(Model.Colors, nameof(ColorListItemViewModel.Id), nameof(ColorListItemViewModel.Name)))" class="form-select"></select>
+                            <span asp-validation-for="ColorIds" class="text-danger"></span>
+                        </div>
+                         <div class="form-group">
+                            <label>Tag</label>
+                            <select asp-for="TagIds" asp-items="@(new SelectList(Model.Tags, nameof(TagListItemViewModel.Id), nameof(TagListItemViewModel.Title)))" class="form-select"></select>
+                            <span asp-validation-for="TagIds" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input asp-for="Name" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input asp-for="Description" class="form-control">
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input asp-for="Price" class="form-control">
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>

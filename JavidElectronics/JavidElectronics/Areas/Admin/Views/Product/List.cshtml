@@ -1,0 +1,58 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.Product
+@model List<ListItemViewModel>
+
+<div class="col-lg-12">
+    <div class="row justify-content-end">
+        <div class="">
+            <a asp-route="admin-product-add" class="btn btn-secondary">Add new Product</a>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Products</h4>
+        </div><!--end card-header-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            @*<th>Image</th>*@
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Catagory</th>
+                            <th>Created at</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                @*<td>
+                                    <img width="20%" src="~/@book.ImageUrl"/>
+                                </td>*@
+                                <td>@product.Name</td>
+                                <td>@product.Price</td>
+                                <td>@product.Description</td>
+                                <td>@string.Join(", ", product.Categories.Select(c => $"{c.Title}->{c.ParentTitle}"))</td>
+                                <td>@product.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td class="text-end">
+
+                                    <a class="btn btn-success" asp-route="admin-product-update" asp-route-id="@product.Id">Update Product</a>
+                                    <form method="POST" asp-route="admin-product-delete" asp-route-id="@product.Id" id="product-form-@product.Id"></form>
+                                    <button class="btn btn-danger" type="submit" form="book-form-@product.Id">
+                                        Delete Product
+                                    </button>
+                                    <a class="btn btn-primary" asp-route="admin-image-list" asp-route-productId="@product.Id">ProductImageList</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>
