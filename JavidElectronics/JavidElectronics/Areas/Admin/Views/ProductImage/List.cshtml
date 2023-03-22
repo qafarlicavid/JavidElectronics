@@ -1,0 +1,64 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.Image
+@model ImageViewModel
+
+<div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-route="admin-product-list">Products</a>
+                        </li><!--end nav-item-->
+                        <li class="breadcrumb-item active">ProductImage</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Images</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="row justify-content-end">
+        <div class="">
+            <a asp-route="admin-image-add" asp-route-productId="@Model.ProductId" target="_blank" class="btn btn-secondary">Add new product image</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Created at</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var productImage in Model.Images!)
+                        {
+                            <tr>
+                                <td><img src="~/@productImage.ImageUrl" width="20%" /></td>
+                                <td>@productImage.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td class="text-end">
+                                    @*<a asp-route="admin-image-update" asp-route-id="@productImage.Id"><i class="las la-pen text-secondary font-16"></i></a>*@
+                                    <form method="POST" asp-route="admin-image-delete" asp-route-productId="@Model.ProductId" asp-route-productImageId="@productImage.Id" id="product-image-form-@productImage.Id"></form>
+                                    <button type="submit" form="product-image-form-@productImage.Id">
+                                        <i class="las la-trash-alt text-secondary font-16"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+
+                        
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>

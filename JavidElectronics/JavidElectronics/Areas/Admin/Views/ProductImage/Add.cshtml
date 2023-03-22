@@ -1,0 +1,30 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.Image
+@model AddViewModel
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Add new product Image</h4>
+            </div>
+            <div class="card-body">
+                <div class="general-label">
+                    <form method="POST" asp-route="admin-image-add" enctype="multipart/form-data">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input asp-for="ProductImage" class="form-control">
+                            <span asp-validation-for="ProductImage" class="text-danger"></span>
+                            <br />
+                            <span asp-validation-for="ProductImage.FileName" class="text-danger"></span>
+                            <br />
+                            <span asp-validation-for="ProductImage.Length" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>
+</div>
