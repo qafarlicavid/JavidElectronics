@@ -40,10 +40,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var productImage in Model.Images!)
+                        @foreach (var productImage in Model.ProductImages!)
                         {
                             <tr>
-                                <td><img src="~/@productImage.ImageUrl" width="20%" /></td>
+                                <td><img src="~/@productImage.ProductImageUrl" width="20%" /></td>
                                 <td>@productImage.CreatedAt.ToString("dd/MM/yyyy")</td>
                                 <td class="text-end">
                                     @*<a asp-route="admin-image-update" asp-route-id="@productImage.Id"><i class="las la-pen text-secondary font-16"></i></a>*@
