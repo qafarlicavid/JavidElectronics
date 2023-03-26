@@ -32,7 +32,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 p.CreatedAt,
                 p.ProductCategories.Select(pc => pc.Category).Select(c => new ListItemViewModel.CategoryViewModel(c.Title, c.Parent.Title)).ToList(),
                 p.ProductColors.Select(pc => pc.Color).Select(c => new ListItemViewModel.ColorViewModel(c.Name)).ToList(),
-                p.ProductSizes.Select(ps => ps.Size).Select(s => new ListItemViewModel.SizeViewModel(s.Name)).ToList(),
                 p.ProductTags.Select(ps => ps.Tag).Select(s => new ListItemViewModel.TagViewModel(s.Title)).ToList()
                 )).ToListAsync();
 
@@ -51,7 +50,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 Categories = await _dataContext.Categories
                     .Select(c => new CategoryListItemViewModel(c.Id, c.Title))
                     .ToListAsync(),
-                Sizes = await _dataContext.Sizes.Select(s => new SizeListItemViewModel(s.Id, s.Name)).ToListAsync(),
                 Colors = await _dataContext.Colors.Select(c => new ColorListItemViewModel(c.Id, c.Name)).ToListAsync(),
                 Tags = await _dataContext.Tags.Select(t => new TagListItemViewModel(t.Id, t.Title)).ToListAsync()
             };
@@ -73,17 +71,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "Something went wrong");
                     _logger.LogWarning($"Category with id({categoryId}) not found in db ");
-                    return GetView(model);
-                }
-
-            }
-
-            foreach (var sizeId in model.SizeIds)
-            {
-                if (!await _dataContext.Sizes.AnyAsync(c => c.Id == sizeId))
-                {
-                    ModelState.AddModelError(string.Empty, "Something went wrong");
-                    _logger.LogWarning($"Size with id({sizeId}) not found in db ");
                     return GetView(model);
                 }
 
@@ -127,10 +114,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 model.Categories = _dataContext.Categories
                    .Select(c => new CategoryListItemViewModel(c.Id, c.Title))
                    .ToList();
-
-                model.Sizes = _dataContext.Sizes
-                 .Select(c => new SizeListItemViewModel(c.Id, c.Name))
-                 .ToList();
 
                 model.Colors = _dataContext.Colors
                  .Select(c => new ColorListItemViewModel(c.Id, c.Name))
@@ -181,17 +164,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                     await _dataContext.ProductColors.AddAsync(productColor);
                 }
 
-                foreach (var sizeId in model.SizeIds)
-                {
-                    var productSize = new ProductSize
-                    {
-                        SizeId = sizeId,
-                        Product = product,
-                    };
-
-                    await _dataContext.ProductSizes.AddAsync(productSize);
-                }
-
                 foreach (var tagId in model.TagIds)
                 {
                     var productTag = new ProductTag
@@ -215,7 +187,7 @@ namespace JavidElectronics.Areas.Admin.Controllers
         public async Task<IActionResult> UpdateAsync([FromRoute] int id)
         {
             var product = await _dataContext.Products
-                .Include(c => c.ProductCategories).Include(c => c.ProductColors).Include(s => s.ProductSizes).Include(t => t.ProductTags)
+                .Include(c => c.ProductCategories).Include(c => c.ProductColors).Include(t => t.ProductTags)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product is null)
@@ -234,9 +206,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 Categories = await _dataContext.Categories.Select(c => new CategoryListItemViewModel(c.Id, c.Title)).ToListAsync(),
                 CategoryIds = product.ProductCategories.Select(pc => pc.CategoryId).ToList(),
 
-                Sizes = await _dataContext.Sizes.Select(c => new SizeListItemViewModel(c.Id, c.Name)).ToListAsync(),
-                SizeIds = product.ProductSizes.Select(pc => pc.SizeId).ToList(),
-
                 Colors = await _dataContext.Colors.Select(c => new ColorListItemViewModel(c.Id, c.Name)).ToListAsync(),
                 ColorIds = product.ProductColors.Select(pc => pc.ColorId).ToList(),
 
@@ -253,7 +222,7 @@ namespace JavidElectronics.Areas.Admin.Controllers
         public async Task<IActionResult> UpdateAsync(UpdateViewModel model)
         {
             var product = await _dataContext.Products
-                    .Include(c => c.ProductCategories).Include(c => c.ProductColors).Include(s => s.ProductSizes).Include(t => t.ProductTags)
+                    .Include(c => c.ProductCategories).Include(c => c.ProductColors).Include(t => t.ProductTags)
                     .FirstOrDefaultAsync(p => p.Id == model.Id);
 
             if (product is null)
@@ -272,17 +241,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "Something went wrong");
                     _logger.LogWarning($"Category with id({categoryId}) not found in db ");
-                    return GetView(model);
-                }
-
-            }
-
-            foreach (var sizeId in model.SizeIds)
-            {
-                if (!await _dataContext.Sizes.AnyAsync(c => c.Id == sizeId))
-                {
-                    ModelState.AddModelError(string.Empty, "Something went wrong");
-                    _logger.LogWarning($"Size with id({sizeId}) not found in db ");
                     return GetView(model);
                 }
 
@@ -327,13 +285,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                    .ToList();
 
                 model.CategoryIds = product.ProductCategories.Select(c => c.CategoryId).ToList();
-
-
-                model.Sizes = _dataContext.Sizes
-                 .Select(c => new SizeListItemViewModel(c.Id, c.Name))
-                 .ToList();
-
-                model.SizeIds = product.ProductSizes.Select(c => c.SizeId).ToList();
 
 
                 model.Colors = _dataContext.Colors
@@ -399,26 +350,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 #endregion
 
 
-                #region Size
-                var sizeInDb = product.ProductSizes.Select(bc => bc.SizeId).ToList();
-                var sizeToRemove = sizeInDb.Except(model.SizeIds).ToList();
-                var sizeToAdd = model.SizeIds.Except(sizeInDb).ToList();
-
-                product.ProductSizes.RemoveAll(bc => sizeToRemove.Contains(bc.SizeId));
-
-
-                foreach (var sizeId in sizeToAdd)
-                {
-                    var productSize = new ProductSize
-                    {
-                        SizeId = sizeId,
-                        Product = product,
-                    };
-
-                    await _dataContext.ProductSizes.AddAsync(productSize);
-                }
-
-                #endregion
 
                 #region Tag
                 var tagInDb = product.ProductTags.Select(bc => bc.TagId).ToList();
