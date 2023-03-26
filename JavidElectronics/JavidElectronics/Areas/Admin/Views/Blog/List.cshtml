@@ -1,0 +1,50 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.Blog
+@model List<ListViewModel>
+
+<div class="col-lg-12">
+    <div class="row justify-content-end">
+        <div class="">
+            <a asp-controller="blog" asp-action="add" target="_blank" class="btn btn-secondary">Add new Blog</a>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Blogs</h4>
+        </div><!--end card-header-->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Tags</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var blog in Model)
+                        {
+                            <tr>
+                                <td>@blog.Title</td>
+                                <td>@blog.Content</td>
+                                <td>@string.Join(", ", blog.Tags.Select(t => t.Title))</td>
+                                <td class="text-end">
+                                    <a asp-route="admin-blog-update" asp-route-id="@blog.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <form method="POST" asp-route="admin-blog-delete" asp-route-id="@blog.Id" id="blog-form-@blog.Id"></form>
+                                    <button type="submit" form="blog-form-@blog.Id">
+                                        <i class="las la-trash-alt text-secondary font-16"></i>
+                                    </button>
+                                    <a asp-route="admin-blog-image-list" asp-route-blogId="@blog.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <a asp-route="admin-blog-video-list" asp-route-blogId="@blog.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>
