@@ -1,0 +1,65 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.BlogVideo
+@model BlogVideosViewModel
+
+<div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-route="admin-blog-list">Blogs</a>
+                        </li><!--end nav-item-->
+                        <li class="breadcrumb-item active">Blog video</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">blogs</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="row justify-content-end">
+        <div class="">
+            <a asp-route="admin-blog-video-add" asp-route-blogId="@Model.BlogId" target="_blank" class="btn btn-secondary">Add new blog video</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>VideoURLFromBrowser</th>
+                            <th>video</th>
+                            <th>Created at</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var blogvideo in Model.videos!)
+                        {
+                            <tr>
+                                <td>@blogvideo.VideoURLFromBrowser</td>
+                                <td><img src="~/@blogvideo.VideoUrL" width="20%" /></td>
+                                <td>@blogvideo.Order</td>
+                                <td>@blogvideo.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td class="text-end">
+                                    <a asp-route="admin-blog-video-update" asp-route-id="@blogvideo.Id" asp-route-blogVideoId="@blogvideo.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <form method="POST" asp-route="admin-blog-video-delete" asp-route-blogId="@Model.BlogId" asp-route-blogVideoId="@blogvideo.Id" id="blog-video-form-@blogvideo.Id"></form>
+                                    <button type="submit" form="blog-video-form-@blogvideo.Id">
+                                        <i class="las la-trash-alt text-secondary font-16"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>

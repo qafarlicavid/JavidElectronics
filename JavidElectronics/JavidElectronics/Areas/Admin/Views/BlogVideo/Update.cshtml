@@ -1,0 +1,33 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.BlogVideo
+@model UpdateViewModel
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Add new blog video</h4>
+            </div>
+            <div class="card-body">
+                <div class="general-label">
+                    <form method="POST" asp-route="admin-blog-video-update" enctype="multipart/form-data">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label>video</label>
+                            <input asp-for="VideoURLFromBrowser" class="form-control">
+                            <span asp-validation-for="VideoURLFromBrowser" class="text-danger"></span>
+                            <input asp-for="Video" class="form-control">
+                            <span asp-validation-for="Video" class="text-danger"></span>
+                            <br />
+                            <span asp-validation-for="Video.FileName" class="text-danger"></span>
+                            <br />
+                            <span asp-validation-for="Video.Length" class="text-danger"></span>
+                            <input asp-for="Order" class="form-control">
+                            <td><img src="~/videoUrL" width="20%" /></td>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>
