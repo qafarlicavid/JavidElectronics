@@ -1,0 +1,18 @@
+﻿@using JavidElectronics.Areas.Client.ViewModels.Home.Index
+@model IndexViewModel
+
+@foreach (var paymentBenefits in Model.PaymentBenefits)
+{
+    <li class="service-item col-lg-4" style="width: 30%;">
+        <div class="service-img">
+            <img src="~/@paymentBenefits.BackGroundImageUrl"
+             alt="Shipping Icon" />
+        </div>
+        <div class="service-content">
+            <span class="title">
+                @paymentBenefits.Title
+                <br />
+            </span>
+        </div>
+    </li>
+}

@@ -2,13 +2,15 @@
 {
     public class ModalViewModel
     {
-        public ModalViewModel(string title, string description, decimal price, string imgUrl, List<ColorViewModel> colors)
+        public ModalViewModel(string title, string description, decimal price, string imgUrl, List<ColorViewModel> colors, List<CategoryViewModel> categories, List<TagViewModel> tags)
         {
             Title = title;
             Description = description;
             Price = price;
             ImgUrl = imgUrl;
             Colors = colors;
+            Categories = categories;
+            Tags = tags;
         }
 
         public string Title { get; set; }
@@ -16,6 +18,8 @@
         public decimal Price { get; set; }
         public string ImgUrl { get; set; }
         public List<ColorViewModel> Colors { get; set; }
+        public List<CategoryViewModel> Categories { get; set; }
+        public List<TagViewModel> Tags { get; set; }
 
         public class ColorViewModel
         {
@@ -26,6 +30,26 @@
             }
             public int Id { get; set; }
             public string Name { get; set; }
+        }
+        public class CategoryViewModel
+        {
+            public CategoryViewModel(string title, int id)
+            {
+                Title = title;
+                Id = id;
+            }
+            public int Id { get; set; }
+            public string Title { get; set; }
+        }
+        public class TagViewModel
+        {
+            public TagViewModel(string title, int id)
+            {
+                Title = title;
+                Id = id;
+            }
+            public int Id { get; set; }
+            public string Title { get; set; }
         }
 
     }

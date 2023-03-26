@@ -36,8 +36,21 @@
                 @Model.Description
             </p>
             <div class="blog_meta">
-                <span class="author d-block">Category : <a href="#">admin</a> </span>
-                <span class="author">Tag : <a href="#">admin</a> </span>
+                <span class="author d-block">
+                    Category :
+                    @foreach (var category in Model.Categories)
+                    {
+                        <a href="#">@category.Title; </a>
+                    }
+                </span>
+
+                <span class="author">
+                    Tag :
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <a href="#">@tag.Title; </a>
+                    }
+                </span>
             </div>
             <ul class="quantity-with-btn">
                 <li class="quantity">
@@ -66,19 +79,7 @@
             </ul>
             <ul class="service-item-wrap pb-0 row" style="padding-top: 3rem;">
 
-                @await Component.InvokeAsync("Benefit")
-
-                <li class="service-item col-lg-4">
-                    <div class="service-img">
-                        <img src="assets/images/about/shipping1.png" alt="Shipping Icon">
-                    </div>
-                    <div class="service-content">
-                        <span class="title">
-                            Free <br>
-                            Shipping
-                        </span>
-                    </div>
-                </li>
+                @await Component.InvokeAsync("PaymentBenefitShop")
 
             </ul>
         </div>
