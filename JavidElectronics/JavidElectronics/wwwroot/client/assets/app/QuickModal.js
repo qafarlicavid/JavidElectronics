@@ -19,9 +19,13 @@ $(document).ready(function () {
                 console.log(data)
             })
 
-        $("#quickModal").modal("show");
+        $("#quickModal").show("modal");
     })
 
+
+    $(".btn-close").click(function () {
+        $(".quick-view-modal").hide();
+    });
 
 
     $('.a-tag li a').filter(function () {
@@ -107,150 +111,150 @@ $(document).ready(function () {
 
 
 
-$(document).on("click", '.select-catagory', function (e) {
-    e.preventDefault();
-    let aHref = e.target.href;
-    let category = e.target.previousElementSibling
-    let CategoryId = category.value;
+//$(document).on("click", '.select-catagory', function (e) {
+//    e.preventDefault();
+//    let aHref = e.target.href;
+//    let category = e.target.previousElementSibling
+//    let CategoryId = category.value;
 
 
-    console.log(CategoryId)
+//    console.log(CategoryId)
 
-    console.log(aHref)
-
-
-
-    $.ajax(
-        {
-            type: "GET",
-            url: aHref,
-
-            data: {
-                CategoryId: CategoryId
-            },
-
-            success: function (response) {
-                console.log(response)
-                $('.filtered-area').html(response);
-
-            },
-            error: function (err) {
-                $(".product-details-modal").html(err.responseText);
-
-            }
-
-        });
-
-})
-
-$(document).on("click", '.select-color', function (e) {
-    e.preventDefault();
-    let aHref = e.target.href;
-    let category = e.target.previousElementSibling
-    let CategoryId = category.value;
-
-
-    console.log(CategoryId)
-
-    console.log(aHref)
+//    console.log(aHref)
 
 
 
-    $.ajax(
-        {
-            type: "GET",
-            url: aHref,
+//    $.ajax(
+//        {
+//            type: "GET",
+//            url: aHref,
 
-            data: {
-                CategoryId: CategoryId
-            },
+//            data: {
+//                CategoryId: CategoryId
+//            },
 
-            success: function (response) {
-                console.log(response)
-                $('.filtered-area').html(response);
+//            success: function (response) {
+//                console.log(response)
+//                $('.filtered-area').html(response);
 
-            },
-            error: function (err) {
-                $(".product-details-modal").html(err.responseText);
+//            },
+//            error: function (err) {
+//                $(".product-details-modal").html(err.responseText);
 
-            }
+//            }
 
-        });
+//        });
 
-})
+//})
 
-$(document).on("click", '.select-tag', function (e) {
-    e.preventDefault();
-    let aHref = e.target.href;
-    let category = e.target.previousElementSibling
-    let CategoryId = category.value;
-
-
-    console.log(CategoryId)
-
-    console.log(aHref)
+//$(document).on("click", '.select-color', function (e) {
+//    e.preventDefault();
+//    let aHref = e.target.href;
+//    let category = e.target.previousElementSibling
+//    let CategoryId = category.value;
 
 
+//    console.log(CategoryId)
 
-    $.ajax(
-        {
-            type: "GET",
-            url: aHref,
-
-            data: {
-                CategoryId: CategoryId
-            },
-
-            success: function (response) {
-                console.log(response)
-                $('.filtered-area').html(response);
-
-            },
-            error: function (err) {
-                $(".product-details-modal").html(err.responseText);
-
-            }
-
-        });
-
-})
+//    console.log(aHref)
 
 
-$(document).on("change", ".searchproductPrice", function (e) {
-    e.preventDefault();
 
-    let minPrice = e.target.previousElementSibling.children[0].children[3].innerText.slice(1);
-    let MinPrice = parseInt(minPrice);
+//    $.ajax(
+//        {
+//            type: "GET",
+//            url: aHref,
 
-    let maxPrice = e.target.previousElementSibling.children[0].children[4].innerText.slice(1);
-    let MaxPrice = parseInt(maxPrice);
-    let aHref = document.querySelector(".shoppage-url").href;
+//            data: {
+//                CategoryId: CategoryId
+//            },
 
-    console.log(MinPrice);
-    console.log(MaxPrice);
-    console.log(aHref)
+//            success: function (response) {
+//                console.log(response)
+//                $('.filtered-area').html(response);
 
-    $.ajax(
-        {
-            url: aHref,
+//            },
+//            error: function (err) {
+//                $(".product-details-modal").html(err.responseText);
 
-            data: {
-                MinPrice: MinPrice,
-                MaxPrice: MaxPrice
+//            }
 
-            },
+//        });
 
-            success: function (response) {
-                $('.filtered-area').html(response);
+//})
 
-
-            },
-            error: function (err) {
-                $(".product-details-modal").html(err.responseText);
-
-            }
-
-        });
+//$(document).on("click", '.select-tag', function (e) {
+//    e.preventDefault();
+//    let aHref = e.target.href;
+//    let category = e.target.previousElementSibling
+//    let CategoryId = category.value;
 
 
-})
+//    console.log(CategoryId)
+
+//    console.log(aHref)
+
+
+
+//    $.ajax(
+//        {
+//            type: "GET",
+//            url: aHref,
+
+//            data: {
+//                CategoryId: CategoryId
+//            },
+
+//            success: function (response) {
+//                console.log(response)
+//                $('.filtered-area').html(response);
+
+//            },
+//            error: function (err) {
+//                $(".product-details-modal").html(err.responseText);
+
+//            }
+
+//        });
+
+//})
+
+
+//$(document).on("change", ".searchproductPrice", function (e) {
+//    e.preventDefault();
+
+//    let minPrice = e.target.previousElementSibling.children[0].children[3].innerText.slice(1);
+//    let MinPrice = parseInt(minPrice);
+
+//    let maxPrice = e.target.previousElementSibling.children[0].children[4].innerText.slice(1);
+//    let MaxPrice = parseInt(maxPrice);
+//    let aHref = document.querySelector(".shoppage-url").href;
+
+//    console.log(MinPrice);
+//    console.log(MaxPrice);
+//    console.log(aHref)
+
+//    $.ajax(
+//        {
+//            url: aHref,
+
+//            data: {
+//                MinPrice: MinPrice,
+//                MaxPrice: MaxPrice
+
+//            },
+
+//            success: function (response) {
+//                $('.filtered-area').html(response);
+
+
+//            },
+//            error: function (err) {
+//                $(".product-details-modal").html(err.responseText);
+
+//            }
+
+//        });
+
+
+//})

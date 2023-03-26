@@ -1,13 +1,13 @@
-$(".quick-view-modal").hide();
+//$(".quick-view-modal").hide();
 
-$(".btn-close").click(function(){
-    $(".quick-view-modal").hide();
-  });
+//$(".btn-close").click(function(){
+//    $(".quick-view-modal").hide();
+//  });
 
-  $(".quickmodalview").click(function(){
-    event.preventDefault();
-    $(".quick-view-modal").show();
-  });
+//  $(".quickmodalview").click(function(){
+//    event.preventDefault();
+//    $(".quick-view-modal").show();
+//  });
 
 
 
