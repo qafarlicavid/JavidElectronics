@@ -285,6 +285,26 @@
 
 
 
+<!-- Product Modal start -->
+
+<div class="modal quick-view-modal fade show" id="quickModal" style="background-color: gray ; opacity: 0.97;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close"></button>
+            </div>
+            <div class="modal-body product-details-modal">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Modal end -->
+
+
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
             integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
@@ -294,6 +314,7 @@
     <script src="~/client/assets/app/minicart.js"></script>
     <script src="~/client/assets/app/homeslider.js"></script>
     <script src="~/client/assets/app/backtotop.js"></script>
+    <script src="~/client/assets/js/QuickModal.js" asp-append-version="true"></script>
 
     @RenderSection("script", required : false)
 

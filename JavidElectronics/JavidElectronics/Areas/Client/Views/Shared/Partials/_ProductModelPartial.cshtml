@@ -1,0 +1,86 @@
+﻿@using JavidElectronics.Areas.Client.ViewModels.Home;
+@using JavidElectronics.Areas.Client.ViewModels.Home.Index.Modal
+@using JavidElectronics.Areas.Client.ViewComponents
+@model ModalViewModel
+
+
+<div class="row modal-wrap">
+    <div class="col-lg-6">
+        <div class="modal-img">
+            <div class="swiper-container modal-slider swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-slide-active">
+                        <a href="#" class="single-img">
+                            <img class="img-full"
+                                 src="~/@Model.ImgUrl"
+                                 alt="Product Image" />
+                        </a>
+                    </div>
+                </div>
+                <span class="swiper-notification"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 pt-5 pt-lg-0">
+        <div class="single-product-content">
+            <h2 class="title">@Model.Title</h2>
+            <div class="price-box">
+                <span class="new-price">$@Model.Price</span>
+            </div>
+
+            <div class="selector-wrap color-option">
+                <span class="selector-title border-bottom-0">Color</span>
+                <select class="nice-select wide border-bottom-0 rounded-0" asp-items="@(new SelectList(Model.Colors, nameof(ModalViewModel.ColorViewModel.Id), nameof(ModalViewModel.ColorViewModel.Name)))"></select>
+            </div>
+            <p class="short-desc">
+                @Model.Description
+            </p>
+            <div class="blog_meta">
+                <span class="author d-block">Category : <a href="#">admin</a> </span>
+                <span class="author">Tag : <a href="#">admin</a> </span>
+            </div>
+            <ul class="quantity-with-btn">
+                <li class="quantity">
+                    <div class="qtySelector" style="padding-bottom: 1rem;">
+                        <i style="padding-right: 30px;" class="fa fa-minus decreaseQty"></i>
+                        <input style="width: 10%;" type="text" class="qtyValue" value="1" />
+                        <i style="padding-right: 100px;" class="fa fa-plus increaseQty"></i>
+                    </div>
+                </li>
+                <li class="add-to-cart">
+                    <a class="btn button btn-custom-size addtocart" style="background-color: #0063d1; color: white;" href="cart.html">
+                        Add
+                        to cart
+                    </a>
+                </li>
+                <li class="wishlist-btn-wrap">
+                    <a class="custom-circle-btn" href="wishlist.html">
+                        <i class="pe-7s-like"></i>
+                    </a>
+                </li>
+                <li class="compare-btn-wrap">
+                    <a class="custom-circle-btn" href="compare.html">
+                        <i class="pe-7s-refresh-2"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="service-item-wrap pb-0 row" style="padding-top: 3rem;">
+
+                @await Component.InvokeAsync("Benefit")
+
+                <li class="service-item col-lg-4">
+                    <div class="service-img">
+                        <img src="assets/images/about/shipping1.png" alt="Shipping Icon">
+                    </div>
+                    <div class="service-content">
+                        <span class="title">
+                            Free <br>
+                            Shipping
+                        </span>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>

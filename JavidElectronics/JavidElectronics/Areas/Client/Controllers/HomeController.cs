@@ -6,6 +6,7 @@ using JavidElectronics.Areas.Client.ViewModels.Home.Contact;
 using JavidElectronics.Services.Abstracts;
 using JavidElectronics.Contracts.File;
 using JavidElectronics.Areas.Client.ViewModels.Home.Index;
+using JavidElectronics.Areas.Client.ViewModels.Home.Index.Modal;
 
 namespace JavidElectronics.Areas.Client.Controllers
 {
@@ -39,6 +40,36 @@ namespace JavidElectronics.Areas.Client.Controllers
 
             return View(model);
         }
+
+        [HttpGet("GetModel/{id}", Name = "Product-GetModel")]
+        public async Task<ActionResult> GetModelAsync(int id)
+        {
+            var product = await _dbContext.Products.Include(p => p.ProductImages)
+                .Include(p => p.ProductColors).FirstOrDefaultAsync(p => p.Id == id);
+
+
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            var model = new ModalViewModel(product.Name, product.Description, product.Price.Value,
+                product.ProductImages!.Take(1).FirstOrDefault() != null
+                ? _fileService.GetFileUrl(product.ProductImages.Take(1).FirstOrDefault()!.ImageNameInFileSystem, UploadDirectory.Product)
+                : String.Empty,
+
+                _dbContext.ProductColors.Include(pc => pc.Color).Where(pc => pc.ProductId == product.Id)
+                .Select(pc => new ModalViewModel.ColorViewModel(pc.Color.Name, pc.Color.Id)).ToList()
+
+                );
+
+            return PartialView("~/Areas/Client/Views/Shared/Partials/_ProductModelPartial.cshtml", model);
+        }
+
+
+
+
+
 
         #region Contact
 

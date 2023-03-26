@@ -1,0 +1,32 @@
+﻿@using JavidElectronics.Areas.Client.ViewModels.Home.Index
+@using JavidElectronics.Areas.Client.ViewComponents
+@model IndexViewModel
+
+@foreach (var product in Model.Products)
+{
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-img-top">
+            <a asp-route="client-shop-index" asp-route-id="@product.Id">
+                <img id="primary-img"
+                 src="~/@product.MainImgUrl"
+                 alt="Product Images" />
+                @*<img id="secondary-img"
+                 src="~/@product.HoverImgUrl"
+                 alt="Product Images" />*@
+            </a>
+            <div class="shop-list">
+                <a href=""><i class="fa-regular fa-heart"></i></a>
+                <a class="pink add-product-to-basket-btn" asp-route="client-basket-add" asp-route-id="@product.Id">Add to Card</a>
+                <a class="quickmodalview show-product-modal" asp-route="Product-GetModel" asp-route-id="@product.Id"><i class="fa-regular fa-eye"></i></a>
+            </div>
+        </div>
+        <div class="sale">0% OFF</div>
+        <div class="card-body">
+            <p>@product.Name</p>
+            <div class="card-text">
+                <span class="new-price">$@product.Price</span>
+            </div>
+        </div>
+    </div>
+}
