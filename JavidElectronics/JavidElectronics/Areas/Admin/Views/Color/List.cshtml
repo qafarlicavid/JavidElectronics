@@ -1,0 +1,44 @@
+﻿@using JavidElectronics.Areas.Admin.ViewModels.Color
+@model List<ListItemViewModel>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Colors</h4>
+        </div><!--end card-header-->
+        <div class="">
+            <a asp-route="admin-color-add" target="_blank" class="btn btn-secondary">Add new Color</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th class="text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var color in Model)
+                        {
+                            <tr>
+                                <td>@color.Id</td>
+                                <td>@color.Name</td>
+                               
+                                <td class="text-end">
+                                    <a asp-route="admin-color-update" asp-route-id="@color.Id"><i class="las la-pen text-secondary font-16"></i></a>
+
+                                    <form class="d-none" method="POST" asp-route="admin-color-delete" asp-route-id="@color.Id" id="update-@color.Id">
+                                    </form>
+
+                                    <button type="submit" form="update-@color.Id"><i class="las la-trash-alt text-secondary font-16"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>
