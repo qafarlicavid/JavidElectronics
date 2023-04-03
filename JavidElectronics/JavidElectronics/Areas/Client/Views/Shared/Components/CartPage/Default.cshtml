@@ -1,0 +1,111 @@
+﻿@using JavidElectronics.Areas.Client.ViewModels.Basket;
+@using JavidElectronics.Services.Abstracts
+@inject IUserService userService
+@model List<BasketCookieViewModel>
+
+<form action="#">
+    <div class="row">
+        <div class="col-12">
+            <div class="table_desc">
+                <div class="cart_page table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="product_remove">Delete</th>
+                                <th class="product_thumb">Image</th>
+                                <th class="product_name">Product</th>
+                                <th class="product-price">Price</th>
+                                <th class="product_quantity">Quantity</th>
+                                <th class="product_total">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="product_remove">
+                                        <a class="remove-product-basket" asp-route="client-shop-basket-delete" asp-route-productId="@item.Id" data-id="@item.Id"><i class="fa fa-trash"></i></a>
+                                    </td>
+
+
+                                    <td class="product_thumb">
+                                        <a href="#">
+                                            <img src="~/@item.ImageUrl" alt="">
+                                        </a>
+                                    </td>
+                                    <td class="product_name"><a href="#">@item.Title</a></td>
+                                    <td class="product-price">$@item.Price</td>
+                                    <td class="product_quantity">
+                                        <a asp-route="client-individual-basket-delete" asp-route-id="@item.Id"
+                                       data-id="@item.Id" class="btn btn-dark minus-btn">
+                                            -
+                                        </a>
+                                        <a asp-route="client-cartpagebasket-update"></a>
+
+                                        <label>@item.Quantity</label>
+
+                                        @*<input min="1" max="100" value="1" type="number">*@
+
+                                        <a asp-route="client-cartpagebasket-add" asp-route-id="@item.Id"
+                                       data-id="@item.Id" class="btn btn-dark plus-btn">
+                                            +
+                                        </a>
+                                        <a asp-route="client-cartpagebasket-update"></a>
+                                    </td>
+                                    <td class="product_total">$@item.Total</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cart_submit text-end">
+                    <button type="submit">update cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--coupon code area start-->
+    <div class="coupon_area">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="coupon_code left">
+                    <h3>Coupon</h3>
+                    <div class="coupon_inner">
+                        <p>Enter your coupon code if you have one.</p>
+                        <input placeholder="Coupon code" type="text">
+                        <button type="submit">Apply coupon</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="coupon_code right">
+                    <h3>Cart Totals</h3>
+                    <div class="coupon_inner ">
+                        <div class="cart_subtotal d-flex">
+                            <p>Subtotal</p>
+                            <p class="cart_amount">$@Model!.Sum(pcvm => pcvm.Total)</p>
+                        </div>
+
+                        <div class="cart_subtotal d-flex">
+                            <p>Total</p>
+                            <p class="cart_amount">$@Model!.Sum(pcvm => pcvm.Total)</p>
+                        </div>
+                        <div class="checkout_btn">
+
+                            @if (userService.IsAuthenticated)
+                            {
+                                <a asp-route="client-order-checkout">Proceed to Checkout</a>
+
+                            }
+                            else
+                            {
+                                <a asp-route="client-auth-login">Proceed to Checkout</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--coupon code area end-->
+</form>

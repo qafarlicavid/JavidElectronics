@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using JavidElectronics.Areas.Client.ViewComponents.Basket
+@using JavidElectronics.Services.Abstracts
+@*@using JavidElectronics.Areas.Client.ViewModels.Basket;
+@model BasketCookieViewModel*@
+@inject IUserService userService
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,13 +12,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javid Electronics</title>
-    <link rel="stylesheet" href="~/client/assets/css/bootstrap.css">
+    <link rel="stylesheet" asp-append-version="true" href="~/client/assets/css/bootstrap.css">
 
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    <link rel="stylesheet" href="~/client/assets/css/style.css">
-    <link rel="stylesheet" href="~/client/assets/css/junko.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    <link rel="stylesheet" asp-append-version="true" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" asp-append-version="true" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" asp-append-version="true" href="~/client/assets/css/style.css">
+    <link rel="stylesheet" asp-append-version="true" href="~/client/assets/css/junko.css">
+    <link rel="stylesheet" asp-append-version="true" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
           integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -40,8 +46,18 @@
                         <div class="col-lg-6 col-md-6 col-6">
                             <div class="top-right text-end">
                                 <ul>
-                                    <li><a href="">My Account</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li>
+                                        @if (userService.IsAuthenticated)
+                                        {
+                                            <a class="dropdown-item" asp-route="client-account-dashboard">@userService.GetCurrentUserFullName()</a>
+                                            <a class="dropdown-item" asp-route="client-auth-logout">Log Out</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item" asp-route="client-auth-login">Login</a>
+                                            <a class="dropdown-item" asp-route="client-auth-register">Register</a>
+                                        }
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -55,7 +71,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-6 col-12">
                             <div class="logo">
-                                <a href="index.html"><img src="~/client/assets/images/logo/logo.jpg" alt=""></a>
+                                <a asp-route="client-home-index"><img src="~/client/assets/images/logo/logo.jpg" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-12">
@@ -72,61 +88,16 @@
 
                                     <div class="mini-cart-wrapper">
                                         <a href="">
-                                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>$147.00 <i class="fa fa-angle-down"></i>
+                                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                            <i class="fa fa-angle-down"></i>
                                         </a>
-                                        <span class="cart-quantity">2</span>
+                                        @*<span class="cart-quantity">1</span>*@
+
+
                                         <!--mini cart-->
                                         <div class="mini-cart">
-                                            <div class="cart-item">
-                                                <div class="cart-img">
-                                                    <a href="#">
-                                                        <img src="~/client/assets/images/product/product1.jpg"
-                                                             alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="cart-info">
-                                                    <a href="#">Iphone 6</a>
-                                                    <p>Quantity: 1 X <span> $60.00 </span></p>
-                                                </div>
-                                                <div class="cart-remove">
-                                                    <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cart-item">
-                                                <div class="cart-img">
-                                                    <a href="#">
-                                                        <img src="~/client/assets/images/product/product2.jpg"
-                                                             alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="cart-info">
-                                                    <a href="#">Samsung</a>
-                                                    <p>Quantity: 1 X <span> $60.00 </span></p>
-                                                </div>
-                                                <div class="cart-remove">
-                                                    <a href="#"><i class="fa-solid fa-xmark"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="mini-cart-table">
-                                                <div class="cart-total">
-                                                    <span>Sub total:</span>
-                                                    <span class="price">$138.00</span>
-                                                </div>
-                                                <div class="cart-total mt-10">
-                                                    <span>total:</span>
-                                                    <span class="price">$138.00</span>
-                                                </div>
-                                            </div>
 
-                                            <div class="mini-cart-footer">
-                                                <div class="cart-button">
-                                                    <a href="cart.html">View cart</a>
-                                                </div>
-                                                <div class="cart-button">
-                                                    <a href="checkout.html">Checkout</a>
-                                                </div>
-
-                                            </div>
+                                            @await Component.InvokeAsync(nameof(MiniBasket));
 
                                         </div>
                                         <!--mini cart end-->
@@ -140,15 +111,13 @@
 
             <!--header middel end-->
             <!--header bottom satrt-->
-
             @await Component.InvokeAsync("NavbarHeader")
-            
+
             <!--header bottom end-->
         </div>
     </header>
 
     <!--header area end-->
-
     @RenderBody();
 
     <!--footer area start-->
@@ -186,8 +155,20 @@
                             <h5 class="widget-title">Account</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="sign-up.html">Login / Register</a></li>
+
+                                    <li>
+                                        @if (userService.IsAuthenticated)
+                                        {
+                                            <a asp-route="client-account-dashboard">My Account</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-route="client-auth-login">My Account(Login!!!)</a>
+
+                                        }
+
+                                    </li>
+                                    <li><a asp-route="client-auth-login">Login / Register</a></li>
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
                                     <li><a href="shop.html">Shop</a></li>
@@ -216,17 +197,17 @@
                                 <span>Save $3 With App &amp; New User only</span>
                                 <div class="download-btn-group d-flex">
                                     <div class="qr-code py-3">
-                                        <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/others/qr.png"
+                                        <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/others/qr.png"
                                              alt="Axilthemes">
                                     </div>
                                     <div class="app-link d-flex flex-column">
                                         <a href="#">
                                             <img class="py-3"
-                                                 src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/others/app-store.png"
+                                                 src="https://new.axilthemes.com/demo/template/etrade/assets/images/others/app-store.png"
                                                  alt="App Store">
                                         </a>
                                         <a href="#">
-                                            <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/others/play-store.png"
+                                            <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/others/play-store.png"
                                                  alt="Play Store">
                                         </a>
                                     </div>
@@ -262,15 +243,15 @@
                             <ul class="payment-icons-bottom d-flex
                             ">
                                 <li>
-                                    <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-1.png"
+                                    <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/icons/cart/cart-1.png"
                                          alt="paypal cart">
                                 </li>
                                 <li>
-                                    <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-2.png"
+                                    <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/icons/cart/cart-2.png"
                                          alt="paypal cart">
                                 </li>
                                 <li>
-                                    <img src="https://new.axilthemes.com/demo/template/etrade/~/client/assets/images/icons/cart/cart-5.png"
+                                    <img src="https://new.axilthemes.com/demo/template/etrade/assets/images/icons/cart/cart-5.png"
                                          alt="paypal cart">
                                 </li>
                             </ul>
@@ -282,38 +263,34 @@
     </footer>
 
     <!--footer area end-->
+    <!-- Product Modal start -->
 
-
-
-<!-- Product Modal start -->
-
-<div class="modal quick-view-modal fade show" id="quickModal" style="background-color: gray ; opacity: 0.97;">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close"></button>
-            </div>
-            <div class="modal-body product-details-modal">
-                
+    <div class="modal quick-view-modal fade show" id="quickModal" style="background-color: gray ; opacity: 0.97;">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close"></button>
+                </div>
+                <div class="modal-body product-details-modal">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Product Modal end -->
-
+    <!-- Product Modal end -->
 
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" asp-append-version="true"
             integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" asp-append-version="true"></script>
     @*<script src="~/client/assets/app/product-modal.js"></script>*@
-    <script src="~/client/assets/app/minicart.js"></script>
-    <script src="~/client/assets/app/homeslider.js"></script>
-    <script src="~/client/assets/app/backtotop.js"></script>
+    <script src="~/client/assets/app/minicart.js" asp-append-version="true"></script>
+    <script src="~/client/assets/app/homeslider.js" asp-append-version="true"></script>
+    <script src="~/client/assets/app/backtotop.js" asp-append-version="true"></script>
     <script src="~/client/assets/app/QuickModal.js" asp-append-version="true"></script>
 
     @RenderSection("script", required : false)

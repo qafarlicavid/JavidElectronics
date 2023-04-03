@@ -8,12 +8,12 @@
     <div class="card" style="width: 18rem;">
         <div class="card-img-top">
             <a asp-route="client-shop-index" asp-route-id="@product.Id">
-                <img id="primary-img"
+                <img class="primary-img"
                  src="~/@product.MainImgUrl"
                  alt="Product Images" />
-                @*<img id="secondary-img"
+                <img class="secondary-img"
                  src="~/@product.HoverImgUrl"
-                 alt="Product Images" />*@
+                 alt="Product Images" />
             </a>
             <div class="shop-list">
                 <a href=""><i class="fa-regular fa-heart"></i></a>

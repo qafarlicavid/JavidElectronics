@@ -1,0 +1,48 @@
+﻿@using JavidElectronics.Areas.Client.ViewModels.Basket;
+@model List<BasketCookieViewModel>
+
+<!--mini cart-->
+<div class="mini-cart">
+
+    @foreach (var product in Model)
+    {
+        <div class="cart-item">
+            <div class="cart-img">
+                <a href="#">
+                    <img src="~/@product.ImageUrl"
+                     alt="">
+                </a>
+            </div>
+            <div class="cart-info">
+                <a href="#">@product.Title</a>
+                <p>@product.Quantity X <span> $@product.Price </span></p>
+            </div>
+            <div class="cart-remove">
+                <a asp-route="client-basket-delete" asp-route-productId="@product.Id" data-id="@product.Id" class="product-item_remove  remove-product-to-basket-btn"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+        </div>
+    }
+
+    <div class="mini-cart-table">
+        <div class="cart-total">
+            <span>Sub total:</span>
+            <span class="price">$@Model!.Sum(pcvm => pcvm.Total)</span>
+        </div>
+        <div class="cart-total mt-10">
+            <span>total:</span>
+            <span class="price">$138.00</span>
+        </div>
+    </div>
+
+    <div class="mini-cart-footer">
+        <div class="cart-button">
+            <a asp-route="client-cart-page-index">View cart</a>
+        </div>
+        <div class="cart-button">
+            <a href="checkout.html">Checkout</a>
+        </div>
+
+    </div>
+
+</div>
+<!--mini cart end-->

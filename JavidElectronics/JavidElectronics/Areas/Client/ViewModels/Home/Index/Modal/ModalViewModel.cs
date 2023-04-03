@@ -1,9 +1,11 @@
-﻿namespace JavidElectronics.Areas.Client.ViewModels.Home.Index.Modal
+﻿
+namespace JavidElectronics.Areas.Client.ViewModels.Home.Index.Modal
 {
     public class ModalViewModel
     {
-        public ModalViewModel(string title, string description, decimal price, string imgUrl, List<ColorViewModel> colors, List<CategoryViewModel> categories, List<TagViewModel> tags)
+        public ModalViewModel(int id,string title, string description, decimal price, string imgUrl, List<ColorViewModel> colors, List<CategoryViewModel> categories, List<TagViewModel> tags)
         {
+            Id = id;
             Title = title;
             Description = description;
             Price = price;
@@ -12,7 +14,7 @@
             Categories = categories;
             Tags = tags;
         }
-
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -51,6 +53,5 @@
             public int Id { get; set; }
             public string Title { get; set; }
         }
-
     }
 }

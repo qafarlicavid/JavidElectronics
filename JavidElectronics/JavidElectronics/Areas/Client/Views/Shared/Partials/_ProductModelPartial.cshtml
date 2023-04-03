@@ -1,5 +1,4 @@
-﻿@using JavidElectronics.Areas.Client.ViewModels.Home;
-@using JavidElectronics.Areas.Client.ViewModels.Home.Index.Modal
+﻿@using JavidElectronics.Areas.Client.ViewModels.Home.Index.Modal
 @using JavidElectronics.Areas.Client.ViewComponents
 @model ModalViewModel
 
@@ -55,13 +54,23 @@
             <ul class="quantity-with-btn">
                 <li class="quantity">
                     <div class="qtySelector" style="padding-bottom: 1rem;">
-                        <i style="padding-right: 30px;" class="fa fa-minus decreaseQty"></i>
-                        <input style="width: 10%;" type="text" class="qtyValue" value="1" />
-                        <i style="padding-right: 100px;" class="fa fa-plus increaseQty"></i>
+                        <a asp-route="client-individual-basket-delete" class="btn minus-btn">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                        <a asp-route="client-cartpagebasket-update"></a>
+
+                        <input style="width: 5%;" type="text" class="qtyValue" value="1" />
+
+                        @*<label>@Model.Baskets.Select(b => b.Quantity)</label>*@
+
+                        <a asp-route="client-cartpagebasket-add" class="btn plus-btn">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <a asp-route="client-cartpagebasket-update" ></a>
                     </div>
                 </li>
                 <li class="add-to-cart">
-                    <a class="btn button btn-custom-size addtocart" style="background-color: #0063d1; color: white;" href="cart.html">
+                    <a asp-route="client-basket-add" asp-route-id="@Model.Id" class="btn button btn-custom-size  add-product-to-basket-btn" style="background-color: #0063d1; color: white;">
                         Add
                         to cart
                     </a>
