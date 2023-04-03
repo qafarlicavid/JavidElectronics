@@ -20,7 +20,9 @@
                         <tr>
                             <th>Title</th>
                             <th>Content</th>
+                            <th>From</th>
                             <th>Tags</th>
+                            <th>Categories</th>
                             <th class="text-end">Actions</th>
                         </tr>
                     </thead>
@@ -30,7 +32,9 @@
                             <tr>
                                 <td>@blog.Title</td>
                                 <td>@blog.Content</td>
+                                <td>@blog.From</td>
                                 <td>@string.Join(", ", blog.Tags.Select(t => t.Title))</td>
+                                <td>@string.Join(", ", blog.Categories.Select(t => t.Title))</td>
                                 <td class="text-end">
                                     <a asp-route="admin-blog-update" asp-route-id="@blog.Id"><i class="las la-pen text-secondary font-16"></i></a>
                                     <form method="POST" asp-route="admin-blog-delete" asp-route-id="@blog.Id" id="blog-form-@blog.Id"></form>

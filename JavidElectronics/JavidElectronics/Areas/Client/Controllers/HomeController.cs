@@ -34,9 +34,8 @@ namespace JavidElectronics.Areas.Client.Controllers
                 fileService.GetFileUrl(s.BackgroundİmageInFileSystem, UploadDirectory.Slider),
                 s.Order))
                 .ToListAsync(),
-            };
 
-
+            }; 
 
             return View(model);
         }
@@ -44,8 +43,12 @@ namespace JavidElectronics.Areas.Client.Controllers
         [HttpGet("GetModel/{id}", Name = "Product-GetModel")]
         public async Task<ActionResult> GetModelAsync(int id)
         {
-            var product = await _dbContext.Products.Include(p => p.ProductImages)
-                .Include(p => p.ProductColors).FirstOrDefaultAsync(p => p.Id == id);
+            var product = await _dbContext.Products
+                .Include(p => p.ProductImages)
+                .Include(p => p.ProductColors)
+                .Include(p => p.ProductTags)
+                .Include(p => p.ProductCategories)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
 
             if (product is null)
@@ -53,13 +56,29 @@ namespace JavidElectronics.Areas.Client.Controllers
                 return NotFound();
             }
 
-            var model = new ModalViewModel(product.Name, product.Description, product.Price.Value,
+            var model = new ModalViewModel(product.Id, product.Name, product.Description, product.Price.Value,
+
                 product.ProductImages!.Take(1).FirstOrDefault() != null
                 ? _fileService.GetFileUrl(product.ProductImages.Take(1).FirstOrDefault()!.ImageNameInFileSystem, UploadDirectory.Product)
                 : String.Empty,
 
-                _dbContext.ProductColors.Include(pc => pc.Color).Where(pc => pc.ProductId == product.Id)
-                .Select(pc => new ModalViewModel.ColorViewModel(pc.Color.Name, pc.Color.Id)).ToList()
+                _dbContext.ProductColors
+                .Include(pc => pc.Color)
+                .Where(pc => pc.ProductId == product.Id)
+                .Select(pc => new ModalViewModel.ColorViewModel(pc.Color.Name, pc.Color.Id))
+                .ToList(),
+
+                _dbContext.ProductCategories
+                .Include(pc => pc.Category)
+                .Where(pc => pc.ProductId == product.Id)
+                .Select(pc => new ModalViewModel.CategoryViewModel(pc.Category.Title, pc.Category.Id))
+                .ToList(),
+
+                _dbContext.ProductTags
+                .Include(pc => pc.Tag)
+                .Where(pc => pc.ProductId == product.Id)
+                .Select(pc => new ModalViewModel.TagViewModel(pc.Tag.Title, pc.Tag.Id))
+                .ToList()
 
                 );
 

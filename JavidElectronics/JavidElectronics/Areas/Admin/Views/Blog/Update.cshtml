@@ -18,6 +18,11 @@
                             <select asp-for="TagIds" asp-items="@(new SelectList(Model.Tags, nameof(JavidElectronics.Areas.Admin.ViewModels.Tag.ListItemViewModel.Id), nameof(JavidElectronics.Areas.Admin.ViewModels.Tag.ListItemViewModel.Title)))" class="form-select">                            </select>
                             <span asp-validation-for="TagIds" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label>CategoryIds</label>
+                            <select asp-for="CategoryIds" asp-items="@(new SelectList(Model.Categories, nameof(JavidElectronics.Areas.Admin.ViewModels.Category.ListItemViewModel.Id), nameof(JavidElectronics.Areas.Admin.ViewModels.Category.ListItemViewModel.Title)))" class="form-select">                            </select>
+                            <span asp-validation-for="CategoryIds" class="text-danger"></span>
+                        </div>
                       
                         <div class="form-group">
                             <label>Title</label>
@@ -29,6 +34,12 @@
                             <label>Content</label>
                             <input asp-for="Content" class="form-control">
                             <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>From</label>
+                            <input asp-for="From" class="form-control">
+                            <span asp-validation-for="From" class="text-danger"></span>
                         </div>
                        
 

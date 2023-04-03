@@ -1,0 +1,23 @@
+﻿@using JavidElectronics.Areas.Client.ViewModels.Home.Index
+@model IndexViewModel
+
+@foreach (var blog in Model.Blogs)
+{
+
+    <div class="col-lg-3">
+        <article class="single_blog">
+            <figure>
+                <div class="blog_thumb">
+                    <a asp-route="client-blog-index" asp-route-id="@blog.Id">
+                        <img src="~/@blog.MainImageUrl" alt="">
+                        </a>
+                </div>
+                <figcaption class="blog_content">
+                    <p class="post_author">By <a href="#">@blog.AdminName</a> @blog.CreatedAt</p>
+                    <h3 class="post_title"><a href="blog-details.html">@blog.Name</a></h3>
+                </figcaption>
+            </figure>
+        </article>
+    </div>
+
+}

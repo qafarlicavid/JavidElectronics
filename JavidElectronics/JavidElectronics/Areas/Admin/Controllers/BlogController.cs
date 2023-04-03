@@ -46,13 +46,14 @@ namespace JavidElectronics.Areas.Admin.Controllers
             {
                 var model = await _dataContext.Blogs
                       .Select(b =>
-                          new ListViewModel(b.Id, b.Title!, b.Content!, b.AdminId, b.Admin!.FirstName,
+                          new ListViewModel(b.Id, b.Title!, b.Content!,b.From!, b.AdminId, b.Admin!.FirstName,
                            b.BlogImages!.Take(1)!.FirstOrDefault()! != null
                            ? _fileService.GetFileUrl(b.BlogImages!.Take(1)!.FirstOrDefault()!.ImageNameInFileSystem!, UploadDirectory.BlogImage)
                            : string.Empty,
-                           b.BlogTags!.Select(pt => new ViewModels.Tag.ListItemViewModel(pt.Tag!.Id, pt.Tag.Title)).ToList()
+                           b.BlogTags!.Select(pt => new ViewModels.Tag.ListItemViewModel(pt.Tag!.Id, pt.Tag.Title)).ToList(),
+                           b.BlogCategories!.Select(bc => new ViewModels.Category.ListItemViewModel(bc.Category!.Id, bc.Category.Title!))
+                           .ToList()
                       ))
-
 
 
                           .ToListAsync();
@@ -70,7 +71,9 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 Tags = await _dataContext.Tags
                     .Select(t => new ViewModels.Tag.ListItemViewModel(t.Id, t.Title))
                     .ToListAsync(),
-
+                Categories = await _dataContext.Categories
+                    .Select(t => new ViewModels.Category.ListItemViewModel(t.Id, t.Title))
+                    .ToListAsync(),
             };
 
             return View(model);
@@ -92,6 +95,17 @@ namespace JavidElectronics.Areas.Admin.Controllers
 
             }
 
+            foreach (var categoryId in model.CategoryIds)
+            {
+                if (!_dataContext.Categories.Any(c => c.Id == categoryId))
+                {
+                    ModelState.AddModelError(string.Empty, "Something went wrong");
+                    _logger.LogWarning($"category with id({categoryId}) not found in db ");
+                    return await GetViewAsync(model);
+                }
+
+            }
+
 
             var blog = await AddBlogAsync();
 
@@ -106,7 +120,9 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 model.Tags = await _dataContext.Tags
                     .Select(t => new ViewModels.Tag.ListItemViewModel(t.Id, t.Title))
                     .ToListAsync();
-
+                model.Categories = await _dataContext.Categories
+                    .Select(t => new ViewModels.Category.ListItemViewModel(t.Id, t.Title))
+                    .ToListAsync();
 
                 return View(model);
             }
@@ -117,18 +133,14 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 {
                     Title = model.Title,
                     Content = model.Content,
-                    Admin = _userService.CurrentUser,
+                    From = model.From,
                     AdminId = _userService.CurrentUser.Id,
-
-
+                    Admin = _userService.CurrentUser,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
                 };
 
                 await _dataContext.Blogs.AddAsync(blog);
-
-
-
-
-
 
 
                 foreach (var tagId in model.TagIds)
@@ -142,6 +154,16 @@ namespace JavidElectronics.Areas.Admin.Controllers
                     await _dataContext.BlogTags.AddAsync(blogTag);
                 }
 
+                foreach (var categoryId in model.CategoryIds)
+                {
+                    var blogCategory = new BlogCategory
+                    {
+                        CategoryId = categoryId,
+                        Blog = blog,
+                    };
+
+                    await _dataContext.BlogCategories.AddAsync(blogCategory);
+                }
                 return blog;
             }
         }
@@ -154,6 +176,7 @@ namespace JavidElectronics.Areas.Admin.Controllers
         {
             var blog = await _dataContext.Blogs
                 .Include(p => p.BlogTags)
+                .Include(p => p.BlogCategories)
                 .FirstOrDefaultAsync(b => b.Id == id);
 
 
@@ -172,11 +195,18 @@ namespace JavidElectronics.Areas.Admin.Controllers
                     Id = blog.Id,
                     Title = blog.Title,
                     Content = blog.Content,
+                    From = blog.From,
                     Tags = await _dataContext.Tags
                                         .Select(t => new ViewModels.Tag.ListItemViewModel(t.Id, t.Title))
                                         .ToListAsync(),
 
                     TagIds = blog!.BlogTags!.Select(pt => pt.TagId).ToList(),
+
+                    Categories = await _dataContext.Categories
+                                        .Select(t => new ViewModels.Category.ListItemViewModel(t.Id, t.Title))
+                                        .ToListAsync(),
+
+                    CategoryIds = blog!.BlogCategories!.Select(pt => pt.CategoryId).ToList(),
 
                 };
                 return model;
@@ -189,17 +219,13 @@ namespace JavidElectronics.Areas.Admin.Controllers
         {
             var blog = await _dataContext.Blogs
                 .Include(p => p.BlogTags)
+                .Include(p => p.BlogCategories)
                 .FirstOrDefaultAsync(p => p.Id == model.Id);
 
 
             if (blog is null) return NotFound();
 
             if (!ModelState.IsValid) return await GetViewAsync(model);
-
-
-
-
-
 
 
 
@@ -215,6 +241,16 @@ namespace JavidElectronics.Areas.Admin.Controllers
             }
 
 
+            foreach (var categoryId in model.CategoryIds)
+            {
+                if (!_dataContext.Categories.Any(t => t.Id == categoryId))
+                {
+                    ModelState.AddModelError(string.Empty, "Something went wrong");
+                    _logger.LogWarning($"tag with id({categoryId}) not found in db ");
+                    return await GetViewAsync(model);
+                }
+
+            }
 
 
             await UpdateBlogAsync();
@@ -233,6 +269,12 @@ namespace JavidElectronics.Areas.Admin.Controllers
 
                 model.TagIds = blog!.BlogTags!.Select(pt => pt.TagId).ToList();
 
+                model.Categories = await _dataContext.Categories
+                 .Select(t => new ViewModels.Category.ListItemViewModel(t.Id, t.Title))
+                 .ToListAsync();
+
+                model.CategoryIds = blog!.BlogCategories!.Select(pt => pt.CategoryId).ToList();
+
 
                 return View(model);
             }
@@ -241,9 +283,11 @@ namespace JavidElectronics.Areas.Admin.Controllers
             {
                 blog.Title = model.Title;
                 blog.Content = model.Content;
+                blog.From = model.From;
 
 
                 await UpdateBlogTag();
+                await UpdateBlogCategory();
 
                 await _dataContext.SaveChangesAsync();
             }
@@ -265,6 +309,25 @@ namespace JavidElectronics.Areas.Admin.Controllers
                     };
 
                     await _dataContext.BlogTags.AddAsync(blogTag);
+                }
+            }
+            async Task UpdateBlogCategory()
+            {
+                var CategoriesInDb = blog.BlogCategories.Select(pt => pt.BlogId).ToList();
+                var CategoriesInDbToRemove = CategoriesInDb.Except(model.CategoryIds).ToList();
+                var CategoriesToAdd = model.CategoryIds.Except(CategoriesInDb).ToList();
+
+                blog.BlogCategories.RemoveAll(pt => CategoriesInDbToRemove.Contains(pt.CategoryId));
+
+                foreach (var categoryId in CategoriesToAdd)
+                {
+                    var blogCategory = new BlogCategory
+                    {
+                        CategoryId = categoryId,
+                        Blog = blog,
+                    };
+
+                    await _dataContext.BlogCategories.AddAsync(blogCategory);
                 }
             }
 
