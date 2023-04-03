@@ -1,6 +1,6 @@
-$(".fa-xmark").click(function(){
-    $(".cart-item").hide();
-  });
+//$(".fa-xmark").click(function(){
+//    $(".cart-item").hide();
+//  });
 
 
 

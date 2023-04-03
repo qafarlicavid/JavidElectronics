@@ -542,7 +542,24 @@ i {
 #hotdealsproducts .cards .card .card-img-top {
   position: relative;
 }
-#hotdealsproducts .cards .card .card-img-top img {
+#hotdealsproducts .cards .card .card-img-top:hover .primary-img {
+  opacity: 0 !important;
+}
+#hotdealsproducts .cards .card .card-img-top:hover .secondary-img {
+  opacity: 1;
+}
+#hotdealsproducts .cards .card .card-img-top .primary-img {
+  opacity: 1;
+  transition: 0.3s;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 50%;
+}
+#hotdealsproducts .cards .card .card-img-top .secondary-img {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
   transition: 0.3s;
   cursor: pointer;
   width: 100%;
@@ -550,7 +567,7 @@ i {
 }
 #hotdealsproducts .cards .card .card-img-top .shop-list {
   position: absolute;
-  bottom: -135px;
+  bottom: -126px;
   left: 53px;
   transition: 0.3s;
   z-index: 100;
