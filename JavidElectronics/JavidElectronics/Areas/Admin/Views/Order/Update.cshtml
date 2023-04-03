@@ -1,0 +1,29 @@
+﻿@using JavidElectronics.Database.Models.Enums
+@using JavidElectronics.Areas.Admin.ViewModels.Order
+@model UpdateViewModel
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Orders</h4>
+            </div>
+            <div class="card-body">
+                <div class="general-label">
+                    <form method="POST" asp-route="admin-order-update" asp-route-id="@Model.Id" enctype="multipart/form-data">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <select asp-for="Status"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<OrderStatus>()">
+                                <option>Select Status</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>
