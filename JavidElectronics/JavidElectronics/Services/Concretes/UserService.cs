@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using JavidElectronics.Areas.Client.ViewModels.Authentication;
-//using JavidElectronics.Areas.Client.ViewModels.Basket;
+using JavidElectronics.Areas.Client.ViewModels.Basket;
 using JavidElectronics.Contracts.Identity;
 using JavidElectronics.Database;
 using JavidElectronics.Database.Models;
@@ -109,14 +109,14 @@ namespace JavidElectronics.Services.Concretes
             var user = await CreateUser();
             var basket = await CreateBasket();
 
-            //await CreateBasketProduct();
+            await CreateBasketProduct();
 
             await _userActivationService.SendActivationUrlAsync(user);
 
 
             await _dataContext.SaveChangesAsync();
 
-
+    
 
 
             async Task<User> CreateUser()
@@ -127,7 +127,7 @@ namespace JavidElectronics.Services.Concretes
                     LastName = model.LastName,
                     Email = model.Email,
                     Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
-                    RoleId = 5,
+                    RoleId = 1,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
                 };
@@ -148,28 +148,28 @@ namespace JavidElectronics.Services.Concretes
                 return basket;
             };
 
-            //async Task CreateBasketProduct()
-            //{
-            //    var productCookieValue = _httpContextAccessor.HttpContext.Request.Cookies["products"];
-            //    if (productCookieValue is not null)
-            //    {
-            //        var productsCookieViewModel = JsonSerializer.Deserialize<List<BasketCookieViewModel>>(productCookieValue);
+            async Task CreateBasketProduct()
+            {
+                var productCookieValue = _httpContextAccessor.HttpContext.Request.Cookies["products"];
+                if (productCookieValue is not null)
+                {
+                    var productsCookieViewModel = JsonSerializer.Deserialize<List<BasketCookieViewModel>>(productCookieValue);
 
-            //        foreach (var cookieViewModel in productsCookieViewModel)
-            //        {
-            //            var product = await _dataContext.Products.FirstOrDefaultAsync(p => p.Id == cookieViewModel.Id);
+                    foreach (var cookieViewModel in productsCookieViewModel)
+                    {
+                        var product = await _dataContext.Products.FirstOrDefaultAsync(p => p.Id == cookieViewModel.Id);
 
-            //            var basketProduct = new BasketProduct
-            //            {
-            //                Basket = basket,
-            //                ProductId = product.Id,
-            //                Quantity = cookieViewModel.Quantity
-            //            };
+                        var basketProduct = new BasketProduct
+                        {
+                            Basket = basket,
+                            ProductId = product.Id,
+                            Quantity = cookieViewModel.Quantity
+                        };
 
-            //            await _dataContext.BasketProducts.AddAsync(basketProduct);
-            //        }
-            //    }
-            //};
+                        await _dataContext.BasketProducts.AddAsync(basketProduct);
+                    }
+                }
+            };
 
         }
 

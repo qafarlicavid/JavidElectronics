@@ -23,7 +23,7 @@ namespace JavidElectronics.Services.Concretes
         }
 
         private MimeMessage CreateEmailMessage(MessageDto message)
-        {
+            {
             var emailMessage = new MimeMessage();
             emailMessage.From.Add(new MailboxAddress(string.Empty, _emailConfig.From));
             emailMessage.To.AddRange(message.To);
