@@ -11,8 +11,8 @@ namespace JavidElectronics.Infrastructure.Configurations
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserActivationService, UserActivationService>();
-            //services.AddScoped<IBasketService, BasketService>();
-            //services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
     }
 }
