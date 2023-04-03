@@ -1,0 +1,51 @@
+﻿@using JavidElectronics.Areas.Client.ViewModels.Authentication
+@model RegisterViewModel
+    
+
+<!-- customer register start -->
+    <div class="customer_login mt-5">
+        <div class="container">
+            <div class="row">
+                
+                <!--register area start -->
+                <div class="col-lg-12 col-12">
+                    <div class="account_form register">
+                        <h2>Register</h2>
+                        <form method="POST" asp-route="client-auth-register">
+                            <p>
+                                <label>First Name<span>*</span></label>
+                                <input asp-for="FirstName" type="text" placeholder="First Name" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </p>
+                            <p>
+                                <label>Last name<span>*</span></label>
+                                <input asp-for="LastName" type="text" placeholder="Last Name" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </p>
+                            <p>
+                                <label>Email address <span>*</span></label>
+                                <input asp-for="Email" type="email" placeholder="Email Address" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </p>
+                            <p>
+                                <label>Password <span>*</span></label>
+                                <input asp-for="Password" type="password" placeholder="Password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </p>
+                            <p>
+                                <label>Confirm Password <span>*</span></label>
+                                <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </p>
+                            <div class="login_submit">
+                                <button type="submit">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--register area end-->
+            </div>
+        </div>
+    </div>
+    <!-- customer register end -->
