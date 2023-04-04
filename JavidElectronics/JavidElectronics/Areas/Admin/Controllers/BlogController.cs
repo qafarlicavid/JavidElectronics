@@ -50,8 +50,8 @@ namespace JavidElectronics.Areas.Admin.Controllers
                            b.BlogImages!.Take(1)!.FirstOrDefault()! != null
                            ? _fileService.GetFileUrl(b.BlogImages!.Take(1)!.FirstOrDefault()!.ImageNameInFileSystem!, UploadDirectory.BlogImage)
                            : string.Empty,
-                           b.BlogTags!.Select(pt => new ViewModels.Tag.ListItemViewModel(pt.Tag!.Id, pt.Tag.Title)).ToList(),
-                           b.BlogCategories!.Select(bc => new ViewModels.Category.ListItemViewModel(bc.Category!.Id, bc.Category.Title!))
+                           b.BlogTags!.Select(pt => new TagListItemViewModel(pt.Tag!.Id, pt.Tag.Title)).ToList(),
+                           b.BlogCategories!.Select(bc => new CategoryListItemViewModel(bc.Category!.Id, bc.Category.Title!))
                            .ToList()
                       ))
 
@@ -69,10 +69,10 @@ namespace JavidElectronics.Areas.Admin.Controllers
             var model = new AddViewModel
             {
                 Tags = await _dataContext.Tags
-                    .Select(t => new ViewModels.Tag.ListItemViewModel(t.Id, t.Title))
+                    .Select(t => new TagListItemViewModel(t.Id, t.Title))
                     .ToListAsync(),
                 Categories = await _dataContext.Categories
-                    .Select(t => new ViewModels.Category.ListItemViewModel(t.Id, t.Title))
+                    .Select(t => new CategoryListItemViewModel(t.Id, t.Title))
                     .ToListAsync(),
             };
 
@@ -92,7 +92,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                     _logger.LogWarning($"tag with id({tagId}) not found in db ");
                     return await GetViewAsync(model);
                 }
-
             }
 
             foreach (var categoryId in model.CategoryIds)
@@ -103,7 +102,6 @@ namespace JavidElectronics.Areas.Admin.Controllers
                     _logger.LogWarning($"category with id({categoryId}) not found in db ");
                     return await GetViewAsync(model);
                 }
-
             }
 
 
@@ -118,10 +116,10 @@ namespace JavidElectronics.Areas.Admin.Controllers
             async Task<IActionResult> GetViewAsync(AddViewModel model)
             {
                 model.Tags = await _dataContext.Tags
-                    .Select(t => new ViewModels.Tag.ListItemViewModel(t.Id, t.Title))
+                    .Select(t => new TagListItemViewModel(t.Id, t.Title))
                     .ToListAsync();
                 model.Categories = await _dataContext.Categories
-                    .Select(t => new ViewModels.Category.ListItemViewModel(t.Id, t.Title))
+                    .Select(t => new CategoryListItemViewModel(t.Id, t.Title))
                     .ToListAsync();
 
                 return View(model);
@@ -164,6 +162,7 @@ namespace JavidElectronics.Areas.Admin.Controllers
 
                     await _dataContext.BlogCategories.AddAsync(blogCategory);
                 }
+
                 return blog;
             }
         }
@@ -197,13 +196,13 @@ namespace JavidElectronics.Areas.Admin.Controllers
                     Content = blog.Content,
                     From = blog.From,
                     Tags = await _dataContext.Tags
-                                        .Select(t => new ViewModels.Tag.ListItemViewModel(t.Id, t.Title))
+                                        .Select(t => new TagListItemViewModel(t.Id, t.Title))
                                         .ToListAsync(),
 
                     TagIds = blog!.BlogTags!.Select(pt => pt.TagId).ToList(),
 
                     Categories = await _dataContext.Categories
-                                        .Select(t => new ViewModels.Category.ListItemViewModel(t.Id, t.Title))
+                                        .Select(t => new CategoryListItemViewModel(t.Id, t.Title))
                                         .ToListAsync(),
 
                     CategoryIds = blog!.BlogCategories!.Select(pt => pt.CategoryId).ToList(),
@@ -264,13 +263,13 @@ namespace JavidElectronics.Areas.Admin.Controllers
             {
 
                 model.Tags = await _dataContext.Tags
-                 .Select(t => new ViewModels.Tag.ListItemViewModel(t.Id, t.Title))
+                 .Select(t => new TagListItemViewModel(t.Id, t.Title))
                  .ToListAsync();
 
                 model.TagIds = blog!.BlogTags!.Select(pt => pt.TagId).ToList();
 
                 model.Categories = await _dataContext.Categories
-                 .Select(t => new ViewModels.Category.ListItemViewModel(t.Id, t.Title))
+                 .Select(t => new CategoryListItemViewModel(t.Id, t.Title))
                  .ToListAsync();
 
                 model.CategoryIds = blog!.BlogCategories!.Select(pt => pt.CategoryId).ToList();

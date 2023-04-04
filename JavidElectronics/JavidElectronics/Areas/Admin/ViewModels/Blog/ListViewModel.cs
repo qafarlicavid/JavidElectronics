@@ -2,7 +2,7 @@
 {
     public class ListViewModel
     {
-        public ListViewModel(int id, string title, string content,string from, Guid? adminId, string? adminName, string videoURL, List<Tag.ListItemViewModel>? tags, List<Category.ListItemViewModel>? categories)
+        public ListViewModel(int id, string title, string content,string from, Guid? adminId, string? adminName, string videoURL, List<TagListItemViewModel>? tags, List<CategoryListItemViewModel>? categories)
         {
             Id = id;
             Title = title;
@@ -23,7 +23,7 @@
         public string? AdminName { get; set; }
 
         public string VideoURL { get; set; }
-        public List<ViewModels.Tag.ListItemViewModel>? Tags { get; set; }
-        public List<ViewModels.Category.ListItemViewModel>? Categories { get; set; }
+        public List<TagListItemViewModel>? Tags { get; set; }
+        public List<CategoryListItemViewModel>? Categories { get; set; }
     }
 }

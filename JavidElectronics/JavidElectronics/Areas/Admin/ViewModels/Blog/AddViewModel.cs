@@ -2,7 +2,7 @@
 {
     public class AddViewModel
     {
-        public AddViewModel(string title, string content,string from, List<Tag.ListItemViewModel>? tags, List<int> tagIds, List<Category.ListItemViewModel>? categories, List<int> categoryIds)
+        public AddViewModel(string title, string content,string from, List<TagListItemViewModel>? tags, List<int> tagIds, List<CategoryListItemViewModel>? categories, List<int> categoryIds)
         {
             Title = title;
             Content = content;
@@ -20,8 +20,9 @@
         public string Title { get; set; } = null!;
         public string Content { get; set; } = null!;
         public string From { get; set; } = null!;
-        public List<ViewModels.Tag.ListItemViewModel>? Tags { get; set; }
-        public List<ViewModels.Category.ListItemViewModel>? Categories { get; set; }
+        public List<TagListItemViewModel>? Tags { get; set; }
+        public List<CategoryListItemViewModel>? Categories { get; set; }
+
         public List<int> TagIds { get; set; }
         public List<int> CategoryIds { get; set; }
 
