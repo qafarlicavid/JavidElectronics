@@ -36,13 +36,13 @@
                                 <td>@string.Join(", ", blog.Tags.Select(t => t.Title))</td>
                                 <td>@string.Join(", ", blog.Categories.Select(t => t.Title))</td>
                                 <td class="text-end">
-                                    <a asp-route="admin-blog-update" asp-route-id="@blog.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <a asp-route="admin-blog-update" asp-route-id="@blog.Id">Update<i class="las la-pen text-secondary font-16"></i></a>
                                     <form method="POST" asp-route="admin-blog-delete" asp-route-id="@blog.Id" id="blog-form-@blog.Id"></form>
                                     <button type="submit" form="blog-form-@blog.Id">
                                         <i class="las la-trash-alt text-secondary font-16"></i>
                                     </button>
-                                    <a asp-route="admin-blog-image-list" asp-route-blogId="@blog.Id"><i class="las la-pen text-secondary font-16"></i></a>
-                                    <a asp-route="admin-blog-video-list" asp-route-blogId="@blog.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <a asp-route="admin-blog-image-list" asp-route-blogId="@blog.Id" class="text-danger">Add Image <i class="las la-pen text-secondary font-16"></i></a>
+                                    <a asp-route="admin-blog-video-list" asp-route-blogId="@blog.Id" class="text-primary"> Add Video <i class="las la-pen text-secondary font-16"></i></a>
                                 </td>
                             </tr>
                         }

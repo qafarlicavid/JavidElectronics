@@ -86,8 +86,11 @@ namespace JavidElectronics.Areas.Admin.Controllers
                 var blogImage = new BlogImage
                 {
                     Blog = blog,
+                    BlogId = blogId,
                     ImageName = model.Image.FileName,
                     ImageNameInFileSystem = imageNameInSystem,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
                 };
                 return blogImage;
             }

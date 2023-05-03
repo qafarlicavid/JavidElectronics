@@ -47,7 +47,9 @@ namespace JavidElectronics.Services.Concretes
                 }
                 else
                 {
-                    var basket = await _dataContext.Baskets.FirstOrDefaultAsync(p => p.UserId == _userService.CurrentUser.Id);
+                    var basket = await _dataContext.Baskets
+                        .Include(b => b.User)
+                        .FirstOrDefaultAsync(p => p.UserId == _userService.CurrentUser.Id);
 
                     basketProduct = new BasketProduct
                     {
